@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cracks Monitor</title>
+  </head>
+  <body>
+    <h1>Cracks Monitor</h1>
+    <h2>Monitor en Desarrollo....</h2>
+    <form id="form">
+      <label for="Consulta">Consulta:</label>
+      <select name="consulta" id="consulta">
+        <option value="SELECT * FROM users">todos los usuarios</option>
+        <option value="SELECT * FROM events">todos los eventos</option>
+        <option
+          value="SELECT COLUMN_NAME
+        FROM INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_NAME = 'USERS'"
+        >tabla users completa
+        </option>
+      </select>
+      <button type="submit">Enviar</button>
+    </form>
+    <div id="respuestaDiv"></div>
+  </body>
+  <script src="main.js"></script>
+</html>

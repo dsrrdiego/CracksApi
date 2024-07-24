@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Login</title>
+</head>
+<body>
+    <form id="loginForm">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <script>
+        async function fetchPublicKey() {
+            const response = await fetch('http://localhost:8080/public.pem');
+            const pem = await response.text();
+            return pemToArrayBuffer(pem);
+        }
+
+        function pemToArrayBuffer(pem) {
+            const b64 = pem.replace(/-----(BEGIN|END) PUBLIC KEY-----|\n/g, '');
+            const binaryDerString = window.atob(b64);
+            const len = binaryDerString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryDerString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        async function encryptPassword(password, publicKey) {
+            const enc = new TextEncoder();
+            const encodedPassword = enc.encode(password);
+            
+            const importedPublicKey = await window.crypto.subtle.importKey(
+                'spki',
+                publicKey,
+                {
+                    name: 'RSA-OAEP',
+                    hash: 'SHA-256'
+                },
+                false,
+                ['encrypt']
+            );
+
+            const encrypted = await window.crypto.subtle.encrypt(
+                {
+                    name: 'RSA-OAEP'
+                },
+                importedPublicKey,
+                encodedPassword
+            );
+
+            // Convertir el resultado a base64
+            return btoa(String.fromCharCode(...new Uint8Array(encrypted)));
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const publicKeyPem = await fetchPublicKey();
+                const encryptedPassword = await encryptPassword(password, publicKeyPem);
+
+                // Enviar el username y el password encriptado al servidor
+                const formData = new FormData();
+                formData.append('user', username);
+                formData.append('pwd', encryptedPassword);
+
+                const response = await fetch('/login2', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    console.log('Login exitoso');
+                } else {
+                    console.error('Error en el login');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+</body>
+</html>

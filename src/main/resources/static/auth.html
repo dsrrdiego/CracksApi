@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulario de Login</title>
+  </head>
+  <body>
+    <form id="loginForm">
+      <label for="username">Usuario:</label>
+      <input type="text" id="username" name="username" required />
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required />
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <script>
+      document
+        .getElementById('loginForm')
+        .addEventListener('submit', async function (event) {
+          event.preventDefault()
+
+          const username = document.getElementById('username').value
+          const password = document.getElementById('password').value
+
+          try {
+            const r1 = await fetch(
+              `/encriptar?clave=${encodeURIComponent(password)}`,
+              {
+                method: 'POST'
+              }
+            )
+            const crypt = await r1.text()
+            console.log('cryp', crypt)
+            const formData = new FormData()
+            formData.append('name', username)
+            formData.append('pwd', crypt)
+            const r2 = await fetch('/login2', {
+              method: 'POST',
+              headers: {
+                accept: '*/*' // Los encabezados Content-Type y Content-Length se configuran automáticamente con FormData
+              },
+              body: formData
+            })
+            token = await r2.text()
+            console.log('token: ' + token)
+          } catch (error) {
+            console.error('Error:', error)
+          }
+        })
+    </script>
+  </body>
+</html>
