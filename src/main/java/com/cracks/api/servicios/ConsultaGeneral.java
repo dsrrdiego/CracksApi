@@ -12,6 +12,7 @@ import jakarta.persistence.Query;
 public class ConsultaGeneral {
     @PersistenceContext
     private EntityManager entityManager;
+    @SuppressWarnings("unchecked")
     public List<Object> consultar(String con){
         Query query = entityManager.createNativeQuery(con);
         

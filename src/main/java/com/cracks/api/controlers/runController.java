@@ -2,9 +2,7 @@ package com.cracks.api.controlers;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -40,10 +38,9 @@ import com.cracks.api.repos.aux.RepoStatusNotification;
 import com.cracks.api.repos.aux.RepoStatusParticipants;
 import com.cracks.api.repos.aux.RepoTypeNotification;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
+@SuppressWarnings("unused")
 @Component
 public class runController implements CommandLineRunner {
 
@@ -120,6 +117,7 @@ public class runController implements CommandLineRunner {
 
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public <T, R extends JpaRepository<T, ?>> void cargar(String tabla, R repo, String[] lista)
             throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException,
             IllegalAccessException, IllegalArgumentException, InvocationTargetException {

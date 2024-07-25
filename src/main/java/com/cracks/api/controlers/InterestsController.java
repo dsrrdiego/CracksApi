@@ -1,9 +1,6 @@
 package com.cracks.api.controlers;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cracks.api.dtos.PullGoalsDto;
 import com.cracks.api.dtos.UserActivitiesDto;
-import com.cracks.api.modelos.Interest;
-import com.cracks.api.repos.RepoInterest;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

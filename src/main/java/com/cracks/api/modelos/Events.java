@@ -2,22 +2,13 @@ package com.cracks.api.modelos;
 
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.cracks.api.dtos.EventDto;
 import com.cracks.api.modelos.aux.CategoryEvents;
 import com.cracks.api.modelos.aux.Coordenadas;
 import com.cracks.api.modelos.aux.StatusEvents;
-import com.cracks.api.repos.RepoUser;
-import com.cracks.api.repos.aux.RepoCategoryEvents;
-import com.cracks.api.repos.aux.RepoStatusEvents;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

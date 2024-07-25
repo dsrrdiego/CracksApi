@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.AbstractFileResolvingResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.PageRequest;
@@ -22,17 +21,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.yaml.snakeyaml.events.Event;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.cracks.api.dtos.EventDto;
 import com.cracks.api.modelos.Events;
-import com.cracks.api.modelos.User;
 import com.cracks.api.modelos.aux.Coordenadas;
 import com.cracks.api.repos.RepoEvents;
 import com.cracks.api.repos.RepoUser;
@@ -41,7 +34,6 @@ import com.cracks.api.repos.aux.RepoCoordenadas;
 import com.cracks.api.repos.aux.RepoStatusEvents;
 import com.cracks.api.servicios.GoalSportsService;
 
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 

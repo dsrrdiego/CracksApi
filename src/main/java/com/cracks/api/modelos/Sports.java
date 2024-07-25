@@ -1,6 +1,5 @@
 package com.cracks.api.modelos;
 
-import java.time.LocalDateTime;
 
 import com.cracks.api.modelos.aux.ClimateSports;
 import com.cracks.api.modelos.aux.DifficultySports;

@@ -53,7 +53,6 @@ public class User {
     private String picture;
 
     public User orElseThrow(Object object) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
     }
 

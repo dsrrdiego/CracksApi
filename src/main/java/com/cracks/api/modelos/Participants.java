@@ -2,7 +2,6 @@ package com.cracks.api.modelos;
 
 import lombok.NoArgsConstructor;
 
-import com.cracks.api.dtos.ParticipantsDto;
 import com.cracks.api.modelos.aux.RoleParticipants;
 import com.cracks.api.modelos.aux.StatusParticipants;
 
