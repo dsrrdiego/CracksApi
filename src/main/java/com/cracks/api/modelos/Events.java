@@ -50,6 +50,9 @@ public class Events {
     private LocalDateTime dateEnd;
 
     @Column
+    private boolean notificado=false;
+
+    @Column
     private String picture;
 
     @Column

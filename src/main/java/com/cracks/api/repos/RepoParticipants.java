@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.cracks.api.modelos.Participants;
+import com.cracks.api.modelos.User;
 
 public interface RepoParticipants extends JpaRepository<Participants,Long>{
     // @Query("SELECT p FROM Participants p WHERE p.user.id=:id")
@@ -18,5 +19,8 @@ public interface RepoParticipants extends JpaRepository<Participants,Long>{
 
     @Query("SELECT p FROM Participants p WHERE p.user.id=:userId AND p.event.id=:eventId")
     Participants findByUserAndEvent(Long userId, Long eventId);
+
+    @Query("SELECT p.user FROM Participants p WHERE p.event.id=:id")
+    List<User> usersByEventId(@Param("id") Long id);
     
 }

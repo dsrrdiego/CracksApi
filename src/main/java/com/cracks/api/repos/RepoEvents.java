@@ -21,6 +21,11 @@ public interface RepoEvents extends JpaRepository<Events,Long>{
     @Query("SELECT e FROM Events e WHERE e.id=:id")
     Events fiXIde(@Param("id") Long id);
 
+    @Query("SELECT e FROM Events e WHERE e.dateEnd<NOW() AND e.notificado=FALSE")
+    List<Events> vencidos();
+
+    
+
     // @Query("SELECT COUNT(e) > 3 FROM Event e")
     // boolean vencido();
 }

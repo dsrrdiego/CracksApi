@@ -19,5 +19,8 @@ public class ConsultaGeneral {
         return query.getResultList();
     }
 
+    // public List<ObjetString exportar(){
+        // return entityManager.createNativeQuery("SCRIPT TO 'bd.sql'").getResultList();
+    // }
     
 }

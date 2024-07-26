@@ -1,0 +1,28 @@
+2024-07-26 12:06:29.184439-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]EXPORT TO ""bd.sql"""; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]EXPORT TO ""bd.sql"""; expected "EXPLAIN, EXECUTE"; SQL statement:
+EXPORT TO "bd.sql" [42001-224]
+2024-07-26 12:07:37.033493-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]EXPORT TO bd.sql"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]EXPORT TO bd.sql"; expected "EXPLAIN, EXECUTE"; SQL statement:
+EXPORT TO bd.sql [42001-224]
+2024-07-26 12:10:02.028581-03:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]EXPORT TO 'bd.sql'"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]EXPORT TO 'bd.sql'"; expected "EXPLAIN, EXECUTE"; SQL statement:
+EXPORT TO 'bd.sql' [42001-224]
+2024-07-26 12:14:29.268888-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]export to 'a.sql'"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]export to 'a.sql'"; expected "EXPLAIN, EXECUTE"; SQL statement:
+export to 'a.sql' [42001-224]
+2024-07-26 12:14:46.365623-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]export to ""a.sql"""; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]export to ""a.sql"""; expected "EXPLAIN, EXECUTE"; SQL statement:
+export to "a.sql" [42001-224]
+2024-07-26 12:14:55.222493-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]EXPORT TO ""a.sql"""; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]EXPORT TO ""a.sql"""; expected "EXPLAIN, EXECUTE"; SQL statement:
+EXPORT TO "a.sql" [42001-224]
+2024-07-26 12:15:07.074346-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]EXPORT TO a.sql"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]EXPORT TO a.sql"; expected "EXPLAIN, EXECUTE"; SQL statement:
+EXPORT TO a.sql [42001-224]

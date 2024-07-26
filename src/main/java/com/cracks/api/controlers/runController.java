@@ -12,6 +12,7 @@ import com.cracks.api.modelos.Events;
 import com.cracks.api.modelos.Goals;
 import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.InterestEvent;
+import com.cracks.api.modelos.InterestUser;
 import com.cracks.api.modelos.Sports;
 import com.cracks.api.modelos.User;
 import com.cracks.api.modelos.aux.ClimateSports;
@@ -23,6 +24,7 @@ import com.cracks.api.modelos.aux.TypeNotification;
 import com.cracks.api.repos.RepoEvents;
 import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoInterestEvents;
+import com.cracks.api.repos.RepoInterestUsers;
 import com.cracks.api.repos.RepoSports;
 import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoCategoryEvents;
@@ -150,75 +152,92 @@ public class runController implements CommandLineRunner {
     
     @Autowired
     private RepoInterest repoInterest;
+    
+    @Autowired
+    private RepoInterestUsers repoInterestUsers;
 
     private void cargaABorrar() {
         try {
-            Events e = new Events();
-            e.setTitle("Juntarnos a correr");
-            LocalDateTime fecha = LocalDateTime.of(2025, 1, 1, 15, 0);
-            e.setDateInit(fecha);
-            re.save(e);
+            // Events e = new Events();
+            // e.setTitle("Juntarnos a correr");
+            // LocalDateTime fecha = LocalDateTime.of(2025, 1, 1, 15, 0);
+            // e.setDateInit(fecha);
+            // re.save(e);
 
-            Events e2 = new Events();
-            e2.setTitle("Nadar");
-            LocalDateTime fecha2 = LocalDateTime.of(2020, 1, 1, 15, 0);
-            e2.setDateInit(fecha2);
-            re.save(e2);
+            // Events e2 = new Events();
+            // e2.setTitle("Nadar");
+            // LocalDateTime fecha2 = LocalDateTime.of(2020, 1, 1, 15, 0);
+            // e2.setDateInit(fecha2);
+            // re.save(e2);
 
-            // for (int i=3;i<10;i++){
-            //     Events a=new Events();
-            //     a.setTitle("e"+i);
-            //     a.setDateInit(fecha);
-            //     re.save(a);
-            // }
+            // // for (int i=3;i<10;i++){
+            // //     Events a=new Events();
+            // //     a.setTitle("e"+i);
+            // //     a.setDateInit(fecha);
+            // //     re.save(a);
+            // // }
 
-            // Guarda con este!!!
-            // User u = new User();
-            // u.setName("Pepe");
-            // ru.save(u);
+            // // Guarda con este!!!
+            // // User u = new User();
+            // // u.setName("Pepe");
+            // // ru.save(u);
 
-            Goals g = new Goals();
-            g.setTitle("Adelgazar");
-            rg.save(g);
+            // Goals g = new Goals();
+            // g.setTitle("Adelgazar");
+            // rg.save(g);
 
-            Goals g2 = new Goals();
-            g2.setTitle("Engordar");
-            rg.save(g2);
+            // Goals g2 = new Goals();
+            // g2.setTitle("Engordar");
+            // rg.save(g2);
 
-            Sports s = new Sports();
-            s.setTitle("futbol");
-            rs.save(s);
+            // Sports s = new Sports();
+            // s.setTitle("futbol");
+            // rs.save(s);
 
-            Sports s2 = new Sports();
-            s2.setTitle("Rugby");
-            rs.save(s2);
+            // Sports s2 = new Sports();
+            // s2.setTitle("Rugby");
+            // rs.save(s2);
 
-            // Intereses
-            InterestEvent ie=new InterestEvent();
-            ie.setEvent(e2);
-            repoInterestEvents.save(ie);
+            // // Intereses
+            // InterestEvent ie=new InterestEvent();
+            // ie.setEvent(e2);
+            // repoInterestEvents.save(ie);
 
-            Interest i1 = new Interest();
-            i1.setOwner(ie);
-            i1.setGoal_sport_interest(g);
-            repoInterest.save(i1);
+            // Interest i1 = new Interest();
+            // i1.setOwner(ie);
+            // i1.setGoal_sport_interest(g);
+            // repoInterest.save(i1);
 
-            Interest i2 = new Interest();
-            i2.setOwner(ie);
-            i2.setGoal_sport_interest(g2);
-            repoInterest.save(i2);
+            // Interest i2 = new Interest();
+            // i2.setOwner(ie);
+            // i2.setGoal_sport_interest(g2);
+            // repoInterest.save(i2);
            
-            Interest i3 = new Interest();
-            i3.setOwner(ie);
-            i3.setGoal_sport_interest(s);
-            repoInterest.save(i3);
+            // Interest i3 = new Interest();
+            // i3.setOwner(ie);
+            // i3.setGoal_sport_interest(s);
+            // repoInterest.save(i3);
 
-            Interest i4 = new Interest();
-            i4.setOwner(ie);
-            i4.setGoal_sport_interest(s2);
-            repoInterest.save(i4);
+            // Interest i4 = new Interest();
+            // i4.setOwner(ie);
+            // i4.setGoal_sport_interest(s2);
+            // repoInterest.save(i4);
 
+            InterestUser iu1=new InterestUser();
+            User u=ru.findById(1L).get();
+            // System.out.println("\n\n****\n"+u.getName());
+            iu1.setUser(u);
+            repoInterestUsers.save(iu1);
+            Interest i5=new Interest();
+            i5.setOwner(iu1);
+            i5.setGoal_sport_interest(rg.findById(1L).get());
+            repoInterest.save(i5);
+            Interest i6=new Interest();
+            i6.setOwner(iu1);
+            i6.setGoal_sport_interest(rs.findById(2L).get());
+            repoInterest.save(i6);
 
+            
             
 
         } catch (Exception e) {

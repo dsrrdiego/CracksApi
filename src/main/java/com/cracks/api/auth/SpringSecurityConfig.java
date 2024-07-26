@@ -51,7 +51,7 @@ public class SpringSecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> {
-                    authorize.requestMatchers("/**","/index.html","/aa","/monitor.html", "/main.js","/cracks.html","/consulta","/public.pem","auth.html","/cracks.zip","/encriptar").permitAll();
+                    authorize.requestMatchers("/exportar","/**","/index.html","/aa","/monitor.html", "/main.js","/cracks.html","/consulta","/public.pem","auth.html","/cracks.zip","/encriptar").permitAll();
                     authorize.requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll();
                     //Guarda, despues cambiar a no - autorizado!!!
                     authorize.requestMatchers(HttpMethod.GET, "/pullUserActivities/**","/pullEventActivities/**","/pullGoals/**","/pullSports/**").permitAll();
