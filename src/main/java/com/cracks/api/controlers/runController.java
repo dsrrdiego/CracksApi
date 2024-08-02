@@ -183,19 +183,19 @@ public class runController implements CommandLineRunner {
             // // ru.save(u);
 
             // Goals g = new Goals();
-            // g.setTitle("Adelgazar");
+            // g.setTitle("Entretenerse");
             // rg.save(g);
 
             // Goals g2 = new Goals();
-            // g2.setTitle("Engordar");
+            // g2.setTitle("Charlar");
             // rg.save(g2);
 
             // Sports s = new Sports();
-            // s.setTitle("futbol");
+            // s.setTitle("Hockey");
             // rs.save(s);
 
             // Sports s2 = new Sports();
-            // s2.setTitle("Rugby");
+            // s2.setTitle("Paddle");
             // rs.save(s2);
 
             // // Intereses

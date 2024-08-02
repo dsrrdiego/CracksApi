@@ -234,3 +234,11 @@ Caused by: java.lang.StringIndexOutOfBoundsException: String index out of range:
 	at org.h2.util.DateTimeUtils.parseTimestamp(DateTimeUtils.java:338)
 	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:86)
 	... 99 more
+2024-08-02 12:08:27.797666-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (GOALS_SPORTS: ""CATEGORY_ID"" BIGINT)"
+Data conversion error converting "'' (GOALS_SPORTS: ""CATEGORY_ID"" BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."GOALS_SPORTS"("ID","TITLE","CATEGORY_ID","COMMUNITY_ID")VALUES(?,?,?,?) [22018-224]
+2024-08-02 12:08:27.804597-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (GOALS_SPORTS: ""CATEGORY_ID"" BIGINT)"
+Data conversion error converting "'' (GOALS_SPORTS: ""CATEGORY_ID"" BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."GOALS_SPORTS"("ID","TITLE","CATEGORY_ID","COMMUNITY_ID")VALUES(?,?,?,?) [22018-224]
