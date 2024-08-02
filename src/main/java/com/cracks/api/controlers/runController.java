@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import com.cracks.api.modelos.Events;
 import com.cracks.api.modelos.Goals;
 import com.cracks.api.modelos.Interest;
-import com.cracks.api.modelos.InterestEvent;
-import com.cracks.api.modelos.InterestUser;
+import com.cracks.api.modelos.OwnerInterestEvent;
+import com.cracks.api.modelos.OwnerInterestUser;
 import com.cracks.api.modelos.Sports;
 import com.cracks.api.modelos.User;
 import com.cracks.api.modelos.aux.ClimateSports;
@@ -23,8 +23,8 @@ import com.cracks.api.modelos.aux.StatusParticipants;
 import com.cracks.api.modelos.aux.TypeNotification;
 import com.cracks.api.repos.RepoEvents;
 import com.cracks.api.repos.RepoInterest;
-import com.cracks.api.repos.RepoInterestEvents;
-import com.cracks.api.repos.RepoInterestUsers;
+import com.cracks.api.repos.RepoOwnerInterestEvents;
+import com.cracks.api.repos.RepoOwnerInterestUsers;
 import com.cracks.api.repos.RepoSports;
 import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoCategoryEvents;
@@ -148,13 +148,13 @@ public class runController implements CommandLineRunner {
     private RepoSports rs;
 
     @Autowired
-    private RepoInterestEvents repoInterestEvents;
+    private RepoOwnerInterestEvents repoInterestEvents;
     
     @Autowired
     private RepoInterest repoInterest;
     
     @Autowired
-    private RepoInterestUsers repoInterestUsers;
+    private RepoOwnerInterestUsers repoInterestUsers;
 
     private void cargaABorrar() {
         try {
@@ -199,7 +199,7 @@ public class runController implements CommandLineRunner {
             // rs.save(s2);
 
             // // Intereses
-            // InterestEvent ie=new InterestEvent();
+            // OwnerInterestEvent ie=new OwnerInterestEvent();
             // ie.setEvent(e2);
             // repoInterestEvents.save(ie);
 
@@ -223,19 +223,21 @@ public class runController implements CommandLineRunner {
             // i4.setGoal_sport_interest(s2);
             // repoInterest.save(i4);
 
-            InterestUser iu1=new InterestUser();
-            User u=ru.findById(1L).get();
+            //Interest User
+            // OwnerInterestUser iu1=new OwnerInterestUser();
+            // User u=ru.findById(1L).get();
             // System.out.println("\n\n****\n"+u.getName());
-            iu1.setUser(u);
-            repoInterestUsers.save(iu1);
-            Interest i5=new Interest();
-            i5.setOwner(iu1);
-            i5.setGoal_sport_interest(rg.findById(1L).get());
-            repoInterest.save(i5);
-            Interest i6=new Interest();
-            i6.setOwner(iu1);
-            i6.setGoal_sport_interest(rs.findById(2L).get());
-            repoInterest.save(i6);
+            // iu1.setUser(u);
+            // repoInterestUsers.save(iu1);
+            // Interest i5=new Interest();
+            // i5.setOwner(iu1);
+            // i5.setGoal_sport_interest(rg.findById(1L).get());
+            // repoInterest.save(i5);
+            // Interest i6=new Interest();
+            // i6.setOwner(iu1);
+            // i6.setGoal_sport_interest(rs.findById(2L).get());
+            // repoInterest.save(i6);
+            // System.out.println("\nInteres i6 creado");
 
             
             

@@ -23,21 +23,21 @@ public class NotificacionesProgramadas {
 
     @Scheduled(fixedRate = 6000)
     public void eventoVencido() {
-        List<Events> eventoVencidos=repoEvents.vencidos();
+        // List<Events> eventoVencidos=repoEvents.vencidos();
 
-        for (Events e : eventoVencidos) {
-            e.setNotificado(true);
-            repoEvents.save(e);
+        // for (Events e : eventoVencidos) {
+        //     e.setNotificado(true);
+        //     repoEvents.save(e);
 
-            System.out.println("\n\n***************"+e.getTitle()+"\n\n");
-            List<User> users=repoParticipants.usersByEventId(e.getId());
-            for (User u : users) {
+        //     System.out.println("\n\n***************"+e.getTitle()+"\n\n");
+        //     List<User> users=repoParticipants.usersByEventId(e.getId());
+        //     for (User u : users) {
                 
-                System.out.println(u.getName());
+        //         System.out.println(u.getName());
                 
-            }
+        //     }
             
-        }
+        // }
     }
 
 }

@@ -20,7 +20,7 @@ import lombok.Setter;
 @Data
 @EqualsAndHashCode(callSuper = true)
 
-public class InterestUser extends OwnerInterest {
+public class OwnerInterestUser extends OwnerInterest {
 
     @ManyToOne
     private User user;
