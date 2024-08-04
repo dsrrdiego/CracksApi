@@ -34,9 +34,12 @@ import com.cracks.api.repos.aux.RepoCoordenadas;
 import com.cracks.api.repos.aux.RepoStatusEvents;
 import com.cracks.api.servicios.GoalSportsService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+@Tag(name = "Eventos", description = "Controladores relacionados a los Eventos de la aplicación")
 @RestController
 public class EventsController {
     @Autowired
@@ -56,9 +59,11 @@ public class EventsController {
 
     @Autowired
     private RepoCategoryEvents repoCategory;
+
     @Autowired
     private RepoCoordenadas repoCoordenadas;
 
+    @Operation(summary = "Eventos paginados", description = "Trae una lista de eventos de acuerdo a la cantidad pedida, empezando por la página 0 de todos los ventos que todavía no han ocurrido.")
     @GetMapping("/pullEvents/{pagina}/{cantidad}")
     public ResponseEntity<ArrayList<Events>> pullEvents(@PathVariable int cantidad, @PathVariable int pagina) {
         PageRequest page = PageRequest.of(pagina, cantidad);
@@ -72,6 +77,7 @@ public class EventsController {
         return new ResponseEntity<ArrayList<Events>>(lista, HttpStatus.OK);
     }
 
+    @Operation(summary = "Evento por Id")
     @GetMapping("/pullEventById/{id}")
     public ResponseEntity<Events> events(@PathVariable Long id) {
         Events e = repoEvents.fiXIde(id);
@@ -80,7 +86,6 @@ public class EventsController {
 
         return new ResponseEntity<Events>(e, HttpStatus.OK);
     }
-    // @Operation(summary = "Carga de evento", description = "{'nombre':'dasdas','nombre3':'dasdas'}")
 
     @PostMapping("/postEvent")
     public ResponseEntity<String> postEvent(@RequestBody EventDto e) {
@@ -108,9 +113,9 @@ public class EventsController {
         byte[] pictureB = picture.getBytes();
         Files.write(path, pictureB);
 
-        Events e=repoEvents.findById(id).get();
+        Events e = repoEvents.findById(id).get();
         e.setPicture(path.getFileName().toString());
-        System.out.println("\n\n"+path.toString()+"\n\n");
+        System.out.println("\n\n" + path.toString() + "\n\n");
         repoEvents.save(e);
 
     }
@@ -123,7 +128,6 @@ public class EventsController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG); // Cambia el tipo de contenido
 
-     
         return new ResponseEntity<>(resource, headers, HttpStatus.OK);
 
     }

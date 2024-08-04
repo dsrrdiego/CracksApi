@@ -11,15 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cracks.api.modelos.Session;
 import com.cracks.api.repos.RepoSession;
 
-@RestController
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Sesión",description = "Todo lo referente a cada sesión de usuario")
+@RestController
 public class SessionController {
 
     @Autowired
     private RepoSession repoSession;
-    @GetMapping("/pullSession/{id}")
-    public ResponseEntity<Session> pullSession(@PathVariable Long id){
-        Session s = repoSession.findByUserId(id);
+
+    @Operation(summary="Session",description="Trae la session correspondiente inidandole u id de Usuario")
+    @GetMapping("/pullSession/{userId}")
+    public ResponseEntity<Session> pullSession(@PathVariable Long userId){
+        Session s = repoSession.findByUserId(userId);
+        s.setPasswrd(null);
         return new ResponseEntity<Session>(s,HttpStatus.OK)  ;
     }
     
