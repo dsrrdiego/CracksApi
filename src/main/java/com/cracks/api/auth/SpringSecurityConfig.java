@@ -56,7 +56,7 @@ public class SpringSecurityConfig {
                     //Guarda, despues cambiar a no - autorizado!!!
                     authorize.requestMatchers(HttpMethod.GET, "/pullUserActivities/**","/pullEventActivities/**","/pullGoals/**","/pullSports/**").permitAll();
                    authorize.requestMatchers(HttpMethod.GET, "/pullUserInformation/**","/pullSession/**").permitAll();
-                   authorize.requestMatchers(HttpMethod.GET, "/pullEvents/**","/pullPassedEventsByUser/**","/pullEventById/**").permitAll();
+                   authorize.requestMatchers(HttpMethod.GET, "/pullAllEvents/**","/pullEvents/**","/pullPassedEventsByUser/**","/pullEventById/**").permitAll();
                    
                    authorize.requestMatchers("/postEvent","/eventPicture").permitAll();
                    authorize.requestMatchers(HttpMethod.GET, "/eventPicture/**").permitAll();
