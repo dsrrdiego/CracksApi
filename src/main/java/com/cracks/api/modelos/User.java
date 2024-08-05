@@ -54,10 +54,10 @@ public class User {
     private String picture;
 
     @OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = true)
-    private List<Interest_users> goals;
+    private List<Interest> goals;
    
     @OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = true)
-    private List<Interest_users> sports;
+    private List<Interest> sports;
    
   
     

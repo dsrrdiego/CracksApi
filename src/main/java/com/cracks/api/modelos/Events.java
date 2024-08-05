@@ -76,6 +76,13 @@ public class Events {
     @Column
     private LocalDateTime registerDate;
 
+
+    @OneToMany(mappedBy="evento", cascade=CascadeType.ALL, orphanRemoval = true)
+    private List<Interest> goals;
+   
+    @OneToMany(mappedBy="evento", cascade=CascadeType.ALL, orphanRemoval = true)
+    private List<Interest> sports;
+
     // @ManyToMany
     // @JoinTable(name="Interest_events")
     // private List<Goals> goals;
