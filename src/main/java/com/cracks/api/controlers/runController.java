@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 
 import com.cracks.api.modelos.Events;
 import com.cracks.api.modelos.Goals;
-import com.cracks.api.modelos.Interest;
-import com.cracks.api.modelos.OwnerInterestEvent;
-import com.cracks.api.modelos.OwnerInterestUser;
+// import com.cracks.api.modelos.Interest;
+// import com.cracks.api.modelos.OwnerInterestEvent;
+// import com.cracks.api.modelos.OwnerInterestUser;
 import com.cracks.api.modelos.Sports;
 import com.cracks.api.modelos.User;
 import com.cracks.api.modelos.aux.ClimateSports;
@@ -22,9 +22,9 @@ import com.cracks.api.modelos.aux.StatusEvents;
 import com.cracks.api.modelos.aux.StatusParticipants;
 import com.cracks.api.modelos.aux.TypeNotification;
 import com.cracks.api.repos.RepoEvents;
-import com.cracks.api.repos.RepoInterest;
-import com.cracks.api.repos.RepoOwnerInterestEvents;
-import com.cracks.api.repos.RepoOwnerInterestUsers;
+// import com.cracks.api.repos.RepoInterest;
+// import com.cracks.api.repos.RepoOwnerInterestEvents;
+// import com.cracks.api.repos.RepoOwnerInterestUsers;
 import com.cracks.api.repos.RepoSports;
 import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoCategoryEvents;
@@ -147,56 +147,68 @@ public class runController implements CommandLineRunner {
     @Autowired
     private RepoSports rs;
 
-    @Autowired
-    private RepoOwnerInterestEvents repoInterestEvents;
+    // @Autowired
+    // private RepoOwnerInterestEvents repoInterestEvents;
     
-    @Autowired
-    private RepoInterest repoInterest;
+    // @Autowired
+    // private RepoInterest repoInterest;
     
-    @Autowired
-    private RepoOwnerInterestUsers repoInterestUsers;
+    // @Autowired
+    // private RepoOwnerInterestUsers repoInterestUsers;
 
     private void cargaABorrar() {
         try {
-            // Events e = new Events();
-            // e.setTitle("Juntarnos a correr");
-            // LocalDateTime fecha = LocalDateTime.of(2025, 1, 1, 15, 0);
-            // e.setDateInit(fecha);
-            // re.save(e);
+            Events e = new Events();
+            e.setTitle("Juntarnos a correr");
+            LocalDateTime fecha = LocalDateTime.of(2025, 1, 1, 15, 0);
+            e.setDateInit(fecha);
+            re.save(e);
 
-            // Events e2 = new Events();
-            // e2.setTitle("Nadar");
-            // LocalDateTime fecha2 = LocalDateTime.of(2020, 1, 1, 15, 0);
-            // e2.setDateInit(fecha2);
-            // re.save(e2);
+            Events e2 = new Events();
+            e2.setTitle("Nadar");
+            LocalDateTime fecha2 = LocalDateTime.of(2020, 1, 1, 15, 0);
+            e2.setDateInit(fecha2);
+            re.save(e2);
 
-            // // for (int i=3;i<10;i++){
-            // //     Events a=new Events();
-            // //     a.setTitle("e"+i);
-            // //     a.setDateInit(fecha);
-            // //     re.save(a);
-            // // }
+            // for (int i=3;i<10;i++){
+            //     Events a=new Events();
+            //     a.setTitle("e"+i);
+            //     a.setDateInit(fecha);
+            //     re.save(a);
+            // }
 
-            // // Guarda con este!!!
-            // // User u = new User();
-            // // u.setName("Pepe");
-            // // ru.save(u);
+            // Guarda con este!!!
+            // User u = new User();
+            // u.setName("Pepe");
+            // ru.save(u);
 
-            // Goals g = new Goals();
-            // g.setTitle("Entretenerse");
-            // rg.save(g);
+            Goals g = new Goals();
+            g.setTitle("Entretenerse");
+            rg.save(g);
 
-            // Goals g2 = new Goals();
-            // g2.setTitle("Charlar");
-            // rg.save(g2);
+            Goals g2 = new Goals();
+            g2.setTitle("Charlar");
+            rg.save(g2);
 
-            // Sports s = new Sports();
-            // s.setTitle("Hockey");
-            // rs.save(s);
+            Sports s = new Sports();
+            s.setTitle("Hockey");
+            rs.save(s);
 
-            // Sports s2 = new Sports();
-            // s2.setTitle("Paddle");
-            // rs.save(s2);
+            Sports s2 = new Sports();
+            s2.setTitle("Paddle");
+            rs.save(s2);
+
+            Goals g3 = new Goals();
+            g3.setTitle("Adelgazar");
+            rg.save(g3);
+
+            Goals g4 = new Goals();
+            g4.setTitle("Engordar");
+            rg.save(g4);
+
+            Sports s3 = new Sports();
+            s3.setTitle("Tennis");
+            rs.save(s3);
 
             // // Intereses
             // OwnerInterestEvent ie=new OwnerInterestEvent();

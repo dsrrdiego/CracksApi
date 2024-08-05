@@ -1,13 +1,18 @@
 package com.cracks.api.modelos;
 
-
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.cracks.api.dtos.EventDto;
+import com.cracks.api.modelos.aux.CategoryEvents;
+import com.cracks.api.modelos.aux.Coordenadas;
+import com.cracks.api.modelos.aux.StatusEvents;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,20 +21,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
-@Data
-@Table(name="Interest")
 public class Interest {
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private OwnerInterest owner;
-
-    @ManyToOne
-    private GoalsSports goal_sport_interest;
-
     @Column
-    private LocalDateTime creationData;
+    private LocalDateTime date;
+
+    
+
 }

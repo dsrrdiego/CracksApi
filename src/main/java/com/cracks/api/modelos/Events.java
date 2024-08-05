@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.cracks.api.dtos.EventDto;
 import com.cracks.api.modelos.aux.CategoryEvents;
@@ -29,6 +30,7 @@ public class Events {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(foreignKey=@ForeignKey(name="FK_id_Events"))
     private User user;
 
     @Column
@@ -74,12 +76,20 @@ public class Events {
     @Column
     private LocalDateTime registerDate;
 
+    @ManyToMany
+    @JoinTable(name="Interest",foreignKey = @ForeignKey(name = "FK_goals_de_Sports"))
+    List<Goals> goals;
 
-    @Transient
-    private ArrayList<String> goals;
+    @ManyToMany
+    @JoinTable(name="Interest",foreignKey = @ForeignKey(name = "FK_goals_de_Sports"))
+    List<Sports> sports;
 
-    @Transient
-    private ArrayList<String> sports;
+
+    // @Transient
+    // private ArrayList<String> goals;
+
+    // @Transient
+    // private ArrayList<String> sports;
 
     public Events(EventDto dto){
         title=dto.getTitle();
