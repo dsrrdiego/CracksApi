@@ -1,8 +1,0 @@
-2024-08-04 21:05:03.092610-03:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (INTEREST: ""GOALS_ID"" BIGINT NOT NULL)"
-Data conversion error converting "'' (INTEREST: ""GOALS_ID"" BIGINT NOT NULL)"; SQL statement:
-INSERT INTO "PUBLIC"."INTEREST"("ID","DATE","USER_ID","SPORTS_ID","GOALS_ID","EVENTS_ID")VALUES(?,?,?,?,?,?) [22018-224]
-2024-08-04 21:05:03.094214-03:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (INTEREST: ""GOALS_ID"" BIGINT NOT NULL)"
-Data conversion error converting "'' (INTEREST: ""GOALS_ID"" BIGINT NOT NULL)"; SQL statement:
-INSERT INTO "PUBLIC"."INTEREST"("ID","DATE","USER_ID","SPORTS_ID","GOALS_ID","EVENTS_ID")VALUES(?,?,?,?,?,?) [22018-224]

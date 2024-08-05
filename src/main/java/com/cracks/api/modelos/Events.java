@@ -76,13 +76,13 @@ public class Events {
     @Column
     private LocalDateTime registerDate;
 
-    @ManyToMany
-    @JoinTable(name="Interest",foreignKey = @ForeignKey(name = "FK_goals_de_Sports"))
-    List<Goals> goals;
+    // @ManyToMany
+    // @JoinTable(name="Interest_events")
+    // private List<Goals> goals;
 
-    @ManyToMany
-    @JoinTable(name="Interest",foreignKey = @ForeignKey(name = "FK_goals_de_Sports"))
-    List<Sports> sports;
+    // @ManyToMany
+    // @JoinTable(name="Interest_events")
+    // private List<Sports> sports;
 
 
     // @Transient

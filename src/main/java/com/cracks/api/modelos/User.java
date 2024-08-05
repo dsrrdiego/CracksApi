@@ -53,13 +53,13 @@ public class User {
     @Column
     private String picture;
 
-    @ManyToMany
-    @JoinTable(name="Interest",foreignKey = @ForeignKey(name = "FK_goals_de_User"))
-    private List<Goals> goals;
-
-    @ManyToMany
-    @JoinTable(name="Interest",foreignKey = @ForeignKey(name = "FK_sports_de_User"))
-    private List<Sports> sports;
+    @OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = true)
+    private List<Interest_users> goals;
+   
+    @OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = true)
+    private List<Interest_users> sports;
+   
+  
     
     public User orElseThrow(Object object) {
         throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
