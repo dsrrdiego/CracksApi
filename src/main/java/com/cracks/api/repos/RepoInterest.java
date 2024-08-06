@@ -24,6 +24,12 @@ public interface RepoInterest extends JpaRepository<Interest,Long>{
 
     @Query("SELECT new com.cracks.api.dtos.UserActivitiesDto(i.id,i.sports.title ) FROM Interest i WHERE i.evento.id=:id")
     List<UserActivitiesDto> getSportsDtoFromEvent(Long id);
+    
+    @Query("SELECT i.goals FROM Interest i WHERE i.evento.id=:id")
+    List<Goals> getGoalsFromEvent(Long id);
+
+    @Query("SELECT i.sports  FROM Interest i WHERE i.evento.id=:id")
+    List<Sports> getSportsFromEvent(Long id);
 
     @Query("SELECT i.goals FROM Interest i WHERE i.usuario.id=:id")
     List<Goals> getGoalsFromUser(Long id);
@@ -31,6 +37,4 @@ public interface RepoInterest extends JpaRepository<Interest,Long>{
     @Query("SELECT i.sports FROM Interest i WHERE i.usuario.id=:id")
     List<Sports> getSportsFromUser(Long id);
 
-    @Query("SELECT i FROM Interest i WHERE i.usuario.id=:id")
-    List<Interest> findByUserId(Long userId);
 }

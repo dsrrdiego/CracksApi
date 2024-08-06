@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import com.cracks.api.dtos.EventDto;
 import com.cracks.api.modelos.Events;
 import com.cracks.api.modelos.Goals;
 import com.cracks.api.modelos.Interest;
+import com.cracks.api.modelos.Sports;
 // import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.aux.Coordenadas;
 import com.cracks.api.repos.RepoEvents;
@@ -72,50 +74,78 @@ public class EventsController {
     @Autowired
     private RepoInterest repoInterest;
 
-    // @Operation(summary = "Eventos paginados", description = "Trae una lista de eventos de acuerdo a la cantidad pedida, empezando por la página 0 de todos los ventos que todavía no han ocurrido.")
+    // @Operation(summary = "Eventos paginados", description = "Trae una lista de
+    // eventos de acuerdo a la cantidad pedida, empezando por la página 0 de todos
+    // los ventos que todavía no han ocurrido.")
     // @GetMapping("/pullEvents/{pagina}/{cantidad}")
-    // public ResponseEntity<ArrayList<Events>> pullAllEvents(@PathVariable int cantidad, @PathVariable int pagina) {
-    //     PageRequest page = PageRequest.of(pagina, cantidad);
-    //     ArrayList<Events> lista = (ArrayList<Events>) repoEvents.findPage(page);
-    //     for (Events e : lista) {
+    // public ResponseEntity<ArrayList<Events>> pullAllEvents(@PathVariable int
+    // cantidad, @PathVariable int pagina) {
+    // PageRequest page = PageRequest.of(pagina, cantidad);
+    // ArrayList<Events> lista = (ArrayList<Events>) repoEvents.findPage(page);
+    // for (Events e : lista) {
 
-    //         e.setGoals(goalSportsService.getEventsGoals(e.getId()));
+    // e.setGoals(goalSportsService.getEventsGoals(e.getId()));
 
-    //         e.setSports(goalSportsService.getEventsSports(e.getId()));
-    //     }
-    //     return new ResponseEntity<ArrayList<Events>>(lista, HttpStatus.OK);
+    // e.setSports(goalSportsService.getEventsSports(e.getId()));
     // }
-    
+    // return new ResponseEntity<ArrayList<Events>>(lista, HttpStatus.OK);
+    // }
+
     @Operation(summary = "Eventos para un usuario (paginado) ", description = "Trae una lista de eventos acordes al usuario, paginado")
     @GetMapping("/pullEvents/{userId}/{pagina}/{cantidad}")
-    public ResponseEntity<List<Events>> pullEvents(@PathVariable Long userId, @PathVariable int cantidad, @PathVariable int pagina) {
+    public ResponseEntity<List<EventDto>> pullEvents(@PathVariable Long userId, @PathVariable int cantidad,
+            @PathVariable int pagina) {
+        List<EventDto> resultado = new ArrayList<>();
 
-        List<Goals> goals =repoInterest.getGoalsFromUser(userId);
-        // List<Events> eventos=repoEvents.getByGoals(goals);
+        List<Goals> uGoals = repoInterest.getGoalsFromUser(userId);
+        List<Sports> uSports = repoInterest.getSportsFromUser(userId);
 
-    //    return new ResponseEntity<List<Interest>>(intereses, HttpStatus.OK);
+        int userGoalsSize = uGoals.size();
+        int userSportsSize = uSports.size();
 
-    //     //
-    //     // PageRequest page = PageRequest.of(pagina, cantidad);
-    //     // ArrayList<Events> lista = (ArrayList<Events>) repoEvents.findPage(page);
-    //     // for (Events e : lista) {
+        List<Events> eventos = repoEvents.findAll(); // guarda con la fecha
+        for (Events e : eventos) {
+            List<Goals> eGoals = repoInterest.getGoalsFromEvent(e.getId());
+            List<Sports> eSports = repoInterest.getSportsFromEvent(e.getId());
 
-    //     //     e.setGoals(goalSportsService.getEventsGoals(e.getId()));
+            int coincidenciasGoals=0;
+            for (Goals eG : eGoals) {
+                if (uGoals.contains(eG)) {
+                    // System.out.println("\n\n***"+eG.getTitle()+"\n\n***");
+                    coincidenciasGoals++;
+                }
+            }
+            int coincidenciasSports=0;
+            for (Sports eS : eSports) {
+                
+                if (uSports.contains(eS)) {
+                    // System.out.println("\n\n***"+eS.getTitle()+"\n\n***");
+                    coincidenciasSports++;
+                    
+                }
+            }
+            System.out.println("\n** Para evento: "+e.getId());
+            System.out.println("Coincide Goals "+coincidenciasGoals+" de "+userGoalsSize );
+            System.out.println("Coincide Sports "+coincidenciasSports+" de "+userSportsSize);
+            double prioridad=0.4*((double)coincidenciasGoals/(double)userGoalsSize)+0.6*((double)coincidenciasSports/(double)userSportsSize);
+            System.out.println("Porcentaje de prioridad: "+prioridad);
+            EventDto eDto=new EventDto(e,prioridad);
 
-    //     //     e.setSports(goalSportsService.getEventsSports(e.getId()));
-    //     // }
-        return new ResponseEntity<List<Events>>(eventos, HttpStatus.OK);
-    // return null;
+            resultado.add(eDto);
+
+        }
+        Collections.sort(resultado);
+        return new ResponseEntity<>(resultado, HttpStatus.OK);
     }
 
     // @Operation(summary = "Evento por Id")
     // @GetMapping("/pullEventById/{id}")
     // public ResponseEntity<Events> events(@PathVariable Long id) {
-    //     Events e = repoEvents.fiXIde(id);
-    //     e.setGoals(goalSportsService.getEventsGoals(id));
-    //     e.setSports(goalSportsService.getEventsSports(id));
+    // Events e = repoEvents.fiXIde(id);
+    // e.setGoals(goalSportsService.getEventsGoals(id));
+    // e.setSports(goalSportsService.getEventsSports(id));
 
-    //     return new ResponseEntity<Events>(e, HttpStatus.OK);
+    // return new ResponseEntity<Events>(e, HttpStatus.OK);
     // }
 
     @PostMapping("/postEvent")
