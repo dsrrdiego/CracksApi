@@ -115,7 +115,7 @@ public class runController implements CommandLineRunner {
         String[] communityGoals = { "Personal", "Social", "Grupo1" };
         cargar("CommunityGoals", repoCommunityGoals, communityGoals);
 
-        cargaABorrar();
+        // cargaABorrar();
 
     }
 

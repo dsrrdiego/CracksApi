@@ -14,8 +14,10 @@ import com.cracks.api.dtos.PullGoalsDto;
 import com.cracks.api.dtos.UserActivitiesDto;
 import com.cracks.api.modelos.Goals;
 import com.cracks.api.modelos.GoalsSports;
+import com.cracks.api.modelos.Interest;
 // import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.aux.CategoryGoals;
+import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoSports;
 import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoGoals;
@@ -44,39 +46,34 @@ public class InterestsController {
     private RepoSports repoSports;
 
     @Autowired
-    private RepoUser repoUser;
+    private RepoInterest repoInterest;
 
     @Operation(summary = "Intereses del usuario", description = "Trae una lista sencilla de todos los Intereses del Usuario")
     @GetMapping("/pullUserActivities/{id}")
-    public ResponseEntity<List<GoalsSports>> pullUserActivities(@PathVariable Long id) {
-        List<GoalsSports> activities =repoUser.getInterest(id);
-        // String jpql = "SELECT new com.cracks.api.dtos.UserActivitiesDto(i.id, :id,i.goal_sport_interest.title) FROM Interest i WHERE TYPE(i.owner) = OwnerInterestUser AND i.owner.user.id=:id";
-        // TypedQuery<UserActivitiesDto> query = entityManager.createQuery(jpql, UserActivitiesDto.class);
-        // query.setParameter("id", id);
-        // return new ResponseEntity<>(query.getResultList(), HttpStatus.OK);
+    public ResponseEntity<List<UserActivitiesDto>> pullUserActivities(@PathVariable Long id) {
+        List<UserActivitiesDto> activities =repoInterest.getGoalsFromUser(id);
+        activities.addAll(repoInterest.getSportsFromUser(id));
         return new ResponseEntity<>(activities, HttpStatus.OK);
-        // return null;
     }
 
     @Operation(summary = "Intereses del Evento", description = "Trae una lista sencilla de todos los Intereses del Evento")
     @GetMapping("/pullEventActivities/{id}")
-    public ResponseEntity<List<EventActivitiesDto>> pullEventActivities(@PathVariable Long id) {
-
-        String jpql = "SELECT new com.cracks.api.dtos.EventActivitiesDto(i.id, :id,i.goal_sport_interest.title) FROM Interest i WHERE TYPE(i.owner) = OwnerInterestEvent AND i.owner.event.id=:id";
-        TypedQuery<EventActivitiesDto> query = entityManager.createQuery(jpql, EventActivitiesDto.class);
-        query.setParameter("id", id);
-        return new ResponseEntity<>(query.getResultList(), HttpStatus.OK);
+    public ResponseEntity<List<UserActivitiesDto>> pullEventActivities(@PathVariable Long id) {
+        List<UserActivitiesDto> activities =repoInterest.getGoalsFromEvent(id);
+        activities.addAll(repoInterest.getSportsFromEvent(id));
+        return new ResponseEntity<>(activities, HttpStatus.OK);
     }
 
     // @Operation(summary = "Coincidencias de Categoria para Objetivo", description = "Trae una lista sencilla de todos los Objetivos cuya Categoría coincida con la categoria de cualquier interes que el usuario tenga")
-    // @GetMapping("/pullGoals/{id}")
+    // @GetMapping("/pullGoals/{userId}")
     // public ResponseEntity<List<CoindicenciasGoalsDto>> goals(@PathVariable Long id) {
-    //     List<CoindicenciasGoalsDto> respuesta = new ArrayList<>();
-    //     String jpql = "SELECT i FROM Interest i WHERE TYPE(i.owner) = OwnerInterestUser AND TYPE(i.goal_sport_interest)=Goals AND i.owner.user.id=:id";
+    //     List<UserActivitiesDto> goals =repoInterest.getGoalsFromUser(id);
+    //     // List<CoindicenciasGoalsDto> respuesta = new ArrayList<>();
+        // String jpql = "SELECT i FROM Interest i WHERE TYPE(i.owner) = OwnerInterestUser AND TYPE(i.goal_sport_interest)=Goals AND i.owner.user.id=:id";
     //     TypedQuery<Interest> query = entityManager.createQuery(jpql, Interest.class);
     //     query.setParameter("id", id);
     //     List<Interest> intereses = query.getResultList();
-    //     for (Interest i : intereses) {
+        // for (Go i : intereses) {
     //         CategoryGoals cat = i.getGoal_sport_interest().getCategory();
     //         List<CoindicenciasGoalsDto> conicidencias = repoGoals.findByCat(cat);
     //         respuesta.addAll(conicidencias);

@@ -8,12 +8,10 @@ import lombok.NoArgsConstructor;
 // @AllArgsConstructor
 public class UserActivitiesDto {
     Long id;
-    Long userId;
     String title;
 
-    public UserActivitiesDto(Long id, Long userId, String title){
+    public UserActivitiesDto(Long id, String title){
         this.id=id;
-        this.userId=userId;
         this.title=title;
     }
 }

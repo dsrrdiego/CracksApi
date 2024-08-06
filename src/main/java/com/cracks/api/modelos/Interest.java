@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.cracks.api.modelos.aux.Coordenadas;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -25,6 +26,7 @@ public class Interest {
     private Long id;
 
     @ManyToOne
+    // @JsonBackReference
     @JoinColumn(name = "usuario_id", nullable = true)
     private User usuario;
 
@@ -33,6 +35,7 @@ public class Interest {
     private Events evento;
 
     @ManyToOne
+    // @JsonBackReference
     @JoinColumn(name = "goals", nullable = true) 
     private Goals goals;
 
