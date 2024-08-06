@@ -27,9 +27,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cracks.api.dtos.EventDto;
 import com.cracks.api.modelos.Events;
+import com.cracks.api.modelos.Goals;
+import com.cracks.api.modelos.Interest;
 // import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.aux.Coordenadas;
 import com.cracks.api.repos.RepoEvents;
+import com.cracks.api.repos.RepoInterest;
 // import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoCategoryEvents;
@@ -48,11 +51,11 @@ public class EventsController {
     @Autowired
     private RepoEvents repoEvents;
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    // @PersistenceContext
+    // private EntityManager entityManager;
 
-    @Autowired
-    private GoalSportsService goalSportsService;
+    // @Autowired
+    // private GoalSportsService goalSportsService;
 
     @Autowired
     private RepoUser repoUser;
@@ -66,8 +69,8 @@ public class EventsController {
     @Autowired
     private RepoCoordenadas repoCoordenadas;
 
-    // @Autowired
-    // private RepoInterest repoInterest;
+    @Autowired
+    private RepoInterest repoInterest;
 
     // @Operation(summary = "Eventos paginados", description = "Trae una lista de eventos de acuerdo a la cantidad pedida, empezando por la página 0 de todos los ventos que todavía no han ocurrido.")
     // @GetMapping("/pullEvents/{pagina}/{cantidad}")
@@ -83,11 +86,12 @@ public class EventsController {
     //     return new ResponseEntity<ArrayList<Events>>(lista, HttpStatus.OK);
     // }
     
-    // @Operation(summary = "Eventos paginados por usuario y coincidencias", description = "Trae una lista de eventos de acordes al usuario, paginado")
-    // @GetMapping("/pullEvents/{userId}/{pagina}/{cantidad}")
-    // public ResponseEntity<List<Interest>> pullEvents(@PathVariable Long userId, @PathVariable int cantidad, @PathVariable int pagina) {
-    //     //traer los intereses del usuario
-    //     List<Interest> intereses =repoInterest.findByUserId(userId);
+    @Operation(summary = "Eventos para un usuario (paginado) ", description = "Trae una lista de eventos acordes al usuario, paginado")
+    @GetMapping("/pullEvents/{userId}/{pagina}/{cantidad}")
+    public ResponseEntity<List<Events>> pullEvents(@PathVariable Long userId, @PathVariable int cantidad, @PathVariable int pagina) {
+
+        List<Goals> goals =repoInterest.getGoalsFromUser(userId);
+        // List<Events> eventos=repoEvents.getByGoals(goals);
 
     //    return new ResponseEntity<List<Interest>>(intereses, HttpStatus.OK);
 
@@ -100,8 +104,9 @@ public class EventsController {
 
     //     //     e.setSports(goalSportsService.getEventsSports(e.getId()));
     //     // }
-    //     // return new ResponseEntity<ArrayList<Events>>(lista, HttpStatus.OK);
-    // }
+        return new ResponseEntity<List<Events>>(eventos, HttpStatus.OK);
+    // return null;
+    }
 
     // @Operation(summary = "Evento por Id")
     // @GetMapping("/pullEventById/{id}")

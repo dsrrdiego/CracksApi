@@ -182,9 +182,9 @@ public class runController implements CommandLineRunner {
             // // u.setName("Pepe");
             // // ru.save(u);
 
-            Goals g = new Goals();
-            g.setTitle("Aburrirse");
-            rg.save(g);
+            // Goals g = new Goals();
+            // g.setTitle("Aburrirse");
+            // rg.save(g);
 
             // Goals g2 = new Goals();
             // g2.setTitle("Charlar");
@@ -194,9 +194,9 @@ public class runController implements CommandLineRunner {
             // s.setTitle("Hockey");
             // rs.save(s);
 
-            Sports s2 = new Sports();
-            s2.setTitle("parkur");
-            rs.save(s2);
+            // Sports s2 = new Sports();
+            // s2.setTitle("parkur");
+            // rs.save(s2);
 
             // Goals g3 = new Goals();
             // g3.setTitle("Adelgazar");

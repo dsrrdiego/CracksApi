@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.cracks.api.modelos.Events;
+import com.cracks.api.modelos.Goals;
+import com.cracks.api.modelos.Interest;
 
 public interface RepoEvents extends JpaRepository<Events,Long>{
     // @Query(value = "SELECT e.* FROM events e WHERE e.date_Init > NOW() ORDER BY id ASC LIMIT :limit OFFSET :offset ", nativeQuery = true)
@@ -23,6 +25,10 @@ public interface RepoEvents extends JpaRepository<Events,Long>{
 
     @Query("SELECT e FROM Events e WHERE e.dateEnd<NOW() AND e.notificado=FALSE")
     List<Events> vencidos();
+
+    // @Query("SELECT e FROM Events e WHERE e.goals LIKE :goals")
+    // @Query("SELECT e FROM Events e JOIN e.goals g WHERE g IN :goals")
+    // List<Events> getByGoals(List<Goals> goals);
 
     
 

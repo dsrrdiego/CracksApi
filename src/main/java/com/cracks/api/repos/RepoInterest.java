@@ -30,4 +30,7 @@ public interface RepoInterest extends JpaRepository<Interest,Long>{
 
     @Query("SELECT i.sports FROM Interest i WHERE i.usuario.id=:id")
     List<Sports> getSportsFromUser(Long id);
+
+    @Query("SELECT i FROM Interest i WHERE i.usuario.id=:id")
+    List<Interest> findByUserId(Long userId);
 }
