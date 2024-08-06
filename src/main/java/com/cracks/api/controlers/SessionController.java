@@ -26,6 +26,8 @@ public class SessionController {
     public ResponseEntity<Session> pullSession(@PathVariable Long userId){
         Session s = repoSession.findByUserId(userId);
         s.setPasswrd(null);
+        s.getUsers().setGoals(null);
+        s.getUsers().setSports(null);
         return new ResponseEntity<Session>(s,HttpStatus.OK)  ;
     }
     

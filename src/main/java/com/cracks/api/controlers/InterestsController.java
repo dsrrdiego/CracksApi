@@ -1,7 +1,9 @@
 package com.cracks.api.controlers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,7 @@ import com.cracks.api.dtos.UserActivitiesDto;
 import com.cracks.api.modelos.Goals;
 import com.cracks.api.modelos.GoalsSports;
 import com.cracks.api.modelos.Interest;
+import com.cracks.api.modelos.Sports;
 // import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.aux.CategoryGoals;
 import com.cracks.api.repos.RepoInterest;
@@ -41,7 +44,7 @@ public class InterestsController {
 
     @Autowired
     private RepoGoals repoGoals;
-    
+
     @Autowired
     private RepoSports repoSports;
 
@@ -51,53 +54,51 @@ public class InterestsController {
     @Operation(summary = "Intereses del usuario", description = "Trae una lista sencilla de todos los Intereses del Usuario")
     @GetMapping("/pullUserActivities/{id}")
     public ResponseEntity<List<UserActivitiesDto>> pullUserActivities(@PathVariable Long id) {
-        List<UserActivitiesDto> activities =repoInterest.getGoalsFromUser(id);
-        activities.addAll(repoInterest.getSportsFromUser(id));
+        List<UserActivitiesDto> activities = repoInterest.getGoalsDtoFromUser(id);
+        activities.addAll(repoInterest.getSportsDtoFromUser(id));
         return new ResponseEntity<>(activities, HttpStatus.OK);
     }
 
     @Operation(summary = "Intereses del Evento", description = "Trae una lista sencilla de todos los Intereses del Evento")
     @GetMapping("/pullEventActivities/{id}")
     public ResponseEntity<List<UserActivitiesDto>> pullEventActivities(@PathVariable Long id) {
-        List<UserActivitiesDto> activities =repoInterest.getGoalsFromEvent(id);
-        activities.addAll(repoInterest.getSportsFromEvent(id));
+        List<UserActivitiesDto> activities = repoInterest.getGoalsDtoFromEvent(id);
+        activities.addAll(repoInterest.getSportsDtoFromEvent(id));
         return new ResponseEntity<>(activities, HttpStatus.OK);
     }
 
-    // @Operation(summary = "Coincidencias de Categoria para Objetivo", description = "Trae una lista sencilla de todos los Objetivos cuya Categoría coincida con la categoria de cualquier interes que el usuario tenga")
-    // @GetMapping("/pullGoals/{userId}")
-    // public ResponseEntity<List<CoindicenciasGoalsDto>> goals(@PathVariable Long id) {
-    //     List<UserActivitiesDto> goals =repoInterest.getGoalsFromUser(id);
-    //     // List<CoindicenciasGoalsDto> respuesta = new ArrayList<>();
-        // String jpql = "SELECT i FROM Interest i WHERE TYPE(i.owner) = OwnerInterestUser AND TYPE(i.goal_sport_interest)=Goals AND i.owner.user.id=:id";
-    //     TypedQuery<Interest> query = entityManager.createQuery(jpql, Interest.class);
-    //     query.setParameter("id", id);
-    //     List<Interest> intereses = query.getResultList();
-        // for (Go i : intereses) {
-    //         CategoryGoals cat = i.getGoal_sport_interest().getCategory();
-    //         List<CoindicenciasGoalsDto> conicidencias = repoGoals.findByCat(cat);
-    //         respuesta.addAll(conicidencias);
+    @Operation(summary = "Coincidencias de Categoria para Objetivo", description = "Trae una lista sencilla de todos los Objetivos cuya Categoría coincida con la categoria de cualquier interes que el usuario tenga")
+    @GetMapping("/pullGoals/{userId}")
+    public ResponseEntity<Set<CoindicenciasGoalsDto>> goals(@PathVariable Long userId) {
+        Set<CoindicenciasGoalsDto> coincidencias = new HashSet<CoindicenciasGoalsDto>();
+        List<Goals> goals = repoInterest.getGoalsFromUser(userId);
+        for (Goals g : goals) {
+            CategoryGoals cat = g.getCategory();
+            coincidencias.addAll(repoGoals.findByCat(cat));
+        }
+        for (Goals g  : goals) {
+            CoindicenciasGoalsDto borrarMe = new CoindicenciasGoalsDto(g.getId(), g.getTitle());
+            coincidencias.remove(borrarMe);
+        }
+        return new ResponseEntity<>(coincidencias, HttpStatus.OK);
+    }
 
-    //     }
-    //     return new ResponseEntity<>(respuesta, HttpStatus.OK);
-    // }
+    @Operation(summary = "Coincidencias de Categoria para Deportes", description = "Trae una lista sencilla de todos los Deportes cuya Categoría coincida con la categorias de cualquier interes que el usuario tenga")
+    @GetMapping("/pullSports/{userId}")
+    public ResponseEntity<Set<CoindicenciasGoalsDto>> sports(@PathVariable Long userId) {
+        Set<CoindicenciasGoalsDto> coincidencias = new HashSet<>();
+        List<Sports> sports = repoInterest.getSportsFromUser(userId);
+        for (Sports s : sports) {
+            CategoryGoals cat = s.getCategory();
+            coincidencias.addAll(repoSports.findByCat(cat));
+        }
+        for (Sports s : sports) {
+            CoindicenciasGoalsDto borrarMe = new CoindicenciasGoalsDto(s.getId(), s.getTitle());
+            coincidencias.remove(borrarMe);
+        }
 
-    // @Operation(summary = "Coincidencias de Categoria para Deportes", description = "Trae una lista sencilla de todos los Deportes cuya Categoría coincida con la categorias de cualquier interes que el usuario tenga")
-    // @GetMapping("/pullSports/{id}")
-    // public ResponseEntity<List<CoindicenciasGoalsDto>> sports(@PathVariable Long id) {
-    //     List<CoindicenciasGoalsDto> respuesta = new ArrayList<>();
-    //     String jpql = "SELECT i FROM Interest i WHERE TYPE(i.owner) = OwnerInterestUser AND TYPE(i.goal_sport_interest)=Sports AND i.owner.user.id=:id";
-    //     TypedQuery<Interest> query = entityManager.createQuery(jpql, Interest.class);
-    //     query.setParameter("id", id);
-    //     List<Interest> intereses = query.getResultList();
-    //     for (Interest i : intereses) {
-    //         CategoryGoals cat = i.getGoal_sport_interest().getCategory();
-    //         List<CoindicenciasGoalsDto> conicidencias = repoSports.findByCat(cat);
-    //         respuesta.addAll(conicidencias);
-
-    //     }
-    //     return new ResponseEntity<>(respuesta, HttpStatus.OK);
-    // }
+        return new ResponseEntity<>(coincidencias, HttpStatus.OK);
+    }
 
     // @GetMapping("/eventActivities/{id}")
     // public ResponseEntity<List<String>> eventgoals(@PathVariable Long id) {

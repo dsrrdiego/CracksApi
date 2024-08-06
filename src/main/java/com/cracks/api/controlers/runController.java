@@ -115,7 +115,7 @@ public class runController implements CommandLineRunner {
         String[] communityGoals = { "Personal", "Social", "Grupo1" };
         cargar("CommunityGoals", repoCommunityGoals, communityGoals);
 
-        // cargaABorrar();
+        cargaABorrar();
 
     }
 
@@ -158,57 +158,57 @@ public class runController implements CommandLineRunner {
 
     private void cargaABorrar() {
         try {
-            Events e = new Events();
-            e.setTitle("Juntarnos a correr");
-            LocalDateTime fecha = LocalDateTime.of(2025, 1, 1, 15, 0);
-            e.setDateInit(fecha);
-            re.save(e);
+            // Events e = new Events();
+            // e.setTitle("Juntarnos a correr");
+            // LocalDateTime fecha = LocalDateTime.of(2025, 1, 1, 15, 0);
+            // e.setDateInit(fecha);
+            // re.save(e);
 
-            Events e2 = new Events();
-            e2.setTitle("Nadar");
-            LocalDateTime fecha2 = LocalDateTime.of(2020, 1, 1, 15, 0);
-            e2.setDateInit(fecha2);
-            re.save(e2);
+            // Events e2 = new Events();
+            // e2.setTitle("Nadar");
+            // LocalDateTime fecha2 = LocalDateTime.of(2020, 1, 1, 15, 0);
+            // e2.setDateInit(fecha2);
+            // re.save(e2);
 
-            // for (int i=3;i<10;i++){
-            //     Events a=new Events();
-            //     a.setTitle("e"+i);
-            //     a.setDateInit(fecha);
-            //     re.save(a);
-            // }
+            // // for (int i=3;i<10;i++){
+            // //     Events a=new Events();
+            // //     a.setTitle("e"+i);
+            // //     a.setDateInit(fecha);
+            // //     re.save(a);
+            // // }
 
-            // Guarda con este!!!
-            // User u = new User();
-            // u.setName("Pepe");
-            // ru.save(u);
+            // // Guarda con este!!!
+            // // User u = new User();
+            // // u.setName("Pepe");
+            // // ru.save(u);
 
             Goals g = new Goals();
-            g.setTitle("Entretenerse");
+            g.setTitle("Aburrirse");
             rg.save(g);
 
-            Goals g2 = new Goals();
-            g2.setTitle("Charlar");
-            rg.save(g2);
+            // Goals g2 = new Goals();
+            // g2.setTitle("Charlar");
+            // rg.save(g2);
 
-            Sports s = new Sports();
-            s.setTitle("Hockey");
-            rs.save(s);
+            // Sports s = new Sports();
+            // s.setTitle("Hockey");
+            // rs.save(s);
 
             Sports s2 = new Sports();
-            s2.setTitle("Paddle");
+            s2.setTitle("parkur");
             rs.save(s2);
 
-            Goals g3 = new Goals();
-            g3.setTitle("Adelgazar");
-            rg.save(g3);
+            // Goals g3 = new Goals();
+            // g3.setTitle("Adelgazar");
+            // rg.save(g3);
 
-            Goals g4 = new Goals();
-            g4.setTitle("Engordar");
-            rg.save(g4);
+            // Goals g4 = new Goals();
+            // g4.setTitle("Engordar");
+            // rg.save(g4);
 
-            Sports s3 = new Sports();
-            s3.setTitle("Tennis");
-            rs.save(s3);
+            // Sports s3 = new Sports();
+            // s3.setTitle("Tennis");
+            // rs.save(s3);
 
             // // Intereses
             // OwnerInterestEvent ie=new OwnerInterestEvent();
