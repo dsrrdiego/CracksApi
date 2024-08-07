@@ -3,7 +3,9 @@ package com.cracks.api.controlers;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
+import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -86,14 +88,17 @@ public class runController implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Config c= new Config();
-        c.setVariable("Ponderacion");
-        c.setValor("3");
-        c.setDescripcion("Ponderacion de Deportes sobre Objetivos para la coincidencia de eventos");
-        repoConfig.save(c);
-        //Datos de Configuracion
+        // Datos de Configuracion
+        try {
 
-
+            Config c = new Config();
+            c.setVariable("Ponderacion");
+            c.setValor("3");
+            c.setDescripcion("Ponderacion de Deportes sobre Objetivos para la coincidencia de eventos");
+            repoConfig.save(c);
+        } catch (Exception e) {
+            System.out.println("\nLa Configuración está seteada!\n");
+        }
         //
 
         String[] dificultades = { "Facil", "Dificil" };
@@ -117,7 +122,8 @@ public class runController implements CommandLineRunner {
         String[] notif = { "Recibida", "Leida", "No Leida", "Archivada" };
         cargar("StatusNotification", repoStatusNotification, notif);
 
-        String[] typeNot = { "SCORE_OWNER","SCORE_PARTICIPANT","Recordatorio", "Aceptación", "Calificación", "General", "Tips", "Faqs" };
+        String[] typeNot = { "SCORE_OWNER", "SCORE_PARTICIPANT", "Recordatorio", "Aceptación", "Calificación",
+                "General", "Tips", "Faqs" };
         cargar("TypeNotification", repoTypeNotification, typeNot);
 
         String[] nameUserS = { "Puntualidad", "Participacion", "Compañerismo" };
@@ -163,110 +169,71 @@ public class runController implements CommandLineRunner {
 
     // @Autowired
     // private RepoOwnerInterestEvents repoInterestEvents;
-    
+
     // @Autowired
     // private RepoInterest repoInterest;
-    
+
     // @Autowired
     // private RepoOwnerInterestUsers repoInterestUsers;
 
     private void cargaABorrar() {
         try {
-            // Events e = new Events();
-            // e.setTitle("Juntarnos a correr");
-            // LocalDateTime fecha = LocalDateTime.of(2025, 1, 1, 15, 0);
-            // e.setDateInit(fecha);
-            // re.save(e);
+            Events e = new Events();
+            e.setTitle("Juntarnos a correr");
+            LocalDateTime fecha = LocalDateTime.of(2025, 1, 1, 15, 0);
+            e.setDateInit(fecha);
+            re.save(e);
 
-            // Events e2 = new Events();
-            // e2.setTitle("Nadar");
-            // LocalDateTime fecha2 = LocalDateTime.of(2020, 1, 1, 15, 0);
-            // e2.setDateInit(fecha2);
-            // re.save(e2);
+            Events e2 = new Events();
+            e2.setTitle("Nadar");
+            LocalDateTime fecha2 = LocalDateTime.of(2026, 1, 1, 15, 0);
+            e2.setDateInit(fecha2);
+            re.save(e2);
 
-            // // for (int i=3;i<10;i++){
-            // //     Events a=new Events();
-            // //     a.setTitle("e"+i);
-            // //     a.setDateInit(fecha);
-            // //     re.save(a);
-            // // }
+            for (int i=3;i<10;i++){
+            Events a=new Events();
+            a.setTitle("e"+i);
+            a.setDateInit(fecha);
+            re.save(a);
+            }
 
-            // // Guarda con este!!!
-            // // User u = new User();
-            // // u.setName("Pepe");
-            // // ru.save(u);
-
-            // Goals g = new Goals();
-            // g.setTitle("Aburrirse");
-            // rg.save(g);
-
-            // Goals g2 = new Goals();
-            // g2.setTitle("Charlar");
-            // rg.save(g2);
-
-            // Sports s = new Sports();
-            // s.setTitle("Hockey");
-            // rs.save(s);
-
-            // Sports s2 = new Sports();
-            // s2.setTitle("parkur");
-            // rs.save(s2);
-
-            // Goals g3 = new Goals();
-            // g3.setTitle("Adelgazar");
-            // rg.save(g3);
-
-            // Goals g4 = new Goals();
-            // g4.setTitle("Engordar");
-            // rg.save(g4);
-
-            // Sports s3 = new Sports();
-            // s3.setTitle("Tennis");
-            // rs.save(s3);
-
-            // // Intereses
-            // OwnerInterestEvent ie=new OwnerInterestEvent();
-            // ie.setEvent(e2);
-            // repoInterestEvents.save(ie);
-
-            // Interest i1 = new Interest();
-            // i1.setOwner(ie);
-            // i1.setGoal_sport_interest(g);
-            // repoInterest.save(i1);
-
-            // Interest i2 = new Interest();
-            // i2.setOwner(ie);
-            // i2.setGoal_sport_interest(g2);
-            // repoInterest.save(i2);
-           
-            // Interest i3 = new Interest();
-            // i3.setOwner(ie);
-            // i3.setGoal_sport_interest(s);
-            // repoInterest.save(i3);
-
-            // Interest i4 = new Interest();
-            // i4.setOwner(ie);
-            // i4.setGoal_sport_interest(s2);
-            // repoInterest.save(i4);
-
-            //Interest User
-            // OwnerInterestUser iu1=new OwnerInterestUser();
-            // User u=ru.findById(1L).get();
-            // System.out.println("\n\n****\n"+u.getName());
-            // iu1.setUser(u);
-            // repoInterestUsers.save(iu1);
-            // Interest i5=new Interest();
-            // i5.setOwner(iu1);
-            // i5.setGoal_sport_interest(rg.findById(1L).get());
-            // repoInterest.save(i5);
-            // Interest i6=new Interest();
-            // i6.setOwner(iu1);
-            // i6.setGoal_sport_interest(rs.findById(2L).get());
-            // repoInterest.save(i6);
-            // System.out.println("\nInteres i6 creado");
+            Goals g0 = new Goals();
+            g0.setTitle("Entrertenerse");
+            rg.save(g0);
+            
+            Goals g1 = new Goals();
+            g1.setTitle("Charlar");
+            rg.save(g1);
 
             
+            Sports s = new Sports();
+            s.setTitle("Hockey");
+            rs.save(s);
             
+            Sports s1 = new Sports();
+            s1.setTitle("Paddle");
+            rs.save(s1);
+            
+            Goals g2 = new Goals();
+            g2.setTitle("Adelgazar");
+            rg.save(g2);
+
+            Goals g3 = new Goals();
+            g3.setTitle("Engordar");
+            rg.save(g3);
+
+            Sports s2 = new Sports();
+            s2.setTitle("Tennis");
+            rs.save(s2);
+            
+            Goals g4 = new Goals();
+            g4.setTitle("Abburrirse");
+            rg.save(g4);
+
+            Sports s3 = new Sports();
+            s3.setTitle("Parkur");
+            rs.save(s3);
+
 
         } catch (Exception e) {
         }

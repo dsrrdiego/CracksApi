@@ -77,24 +77,7 @@ public class EventsController {
 
     @Autowired
     private RepoConfig repoConfig;
-
-    // @Operation(summary = "Eventos paginados", description = "Trae una lista de
-    // eventos de acuerdo a la cantidad pedida, empezando por la página 0 de todos
-    // los ventos que todavía no han ocurrido.")
-    // @GetMapping("/pullEvents/{pagina}/{cantidad}")
-    // public ResponseEntity<ArrayList<Events>> pullAllEvents(@PathVariable int
-    // cantidad, @PathVariable int pagina) {
-    // PageRequest page = PageRequest.of(pagina, cantidad);
-    // ArrayList<Events> lista = (ArrayList<Events>) repoEvents.findPage(page);
-    // for (Events e : lista) {
-
-    // e.setGoals(goalSportsService.getEventsGoals(e.getId()));
-
-    // e.setSports(goalSportsService.getEventsSports(e.getId()));
-    // }
-    // return new ResponseEntity<ArrayList<Events>>(lista, HttpStatus.OK);
-    // }
-
+   
     @Operation(summary = "Eventos para un usuario (paginado) ", description = "Trae una lista de eventos acordes al usuario, paginado , comenzado por página 1")
     @GetMapping("/pullEvents/{userId}/{pagina}/{cantidad}")
     public ResponseEntity<List<EventDto>> pullEvents(@PathVariable Long userId, @PathVariable int cantidad,
