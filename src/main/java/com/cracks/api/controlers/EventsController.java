@@ -135,15 +135,17 @@ public class EventsController {
         return new ResponseEntity<>(resultado, HttpStatus.OK);
     }
 
-    // @Operation(summary = "Evento por Id")
-    // @GetMapping("/pullEventById/{id}")
-    // public ResponseEntity<Events> events(@PathVariable Long id) {
+    @Operation(summary = "Evento por Id")
+    @GetMapping("/pullEventById/{id}")
+    public ResponseEntity<EventDto> events(@PathVariable Long id) {
+    Events e = repoEvents.findById(id).get();
+    EventDto eDto=new EventDto(e,1,1);
     // Events e = repoEvents.fiXIde(id);
     // e.setGoals(goalSportsService.getEventsGoals(id));
     // e.setSports(goalSportsService.getEventsSports(id));
 
-    // return new ResponseEntity<Events>(e, HttpStatus.OK);
-    // }
+    return new ResponseEntity<>(eDto, HttpStatus.OK);
+    }
 
     @PostMapping("/postEvent")
     public ResponseEntity<String> postEvent(@RequestBody EventDto e) {
