@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import com.cracks.api.modelos.Config;
 import com.cracks.api.modelos.Events;
 import com.cracks.api.modelos.Goals;
 // import com.cracks.api.modelos.Interest;
@@ -21,6 +22,7 @@ import com.cracks.api.modelos.aux.RoleParticipants;
 import com.cracks.api.modelos.aux.StatusEvents;
 import com.cracks.api.modelos.aux.StatusParticipants;
 import com.cracks.api.modelos.aux.TypeNotification;
+import com.cracks.api.repos.RepoConfig;
 import com.cracks.api.repos.RepoEvents;
 // import com.cracks.api.repos.RepoInterest;
 // import com.cracks.api.repos.RepoOwnerInterestEvents;
@@ -79,8 +81,20 @@ public class runController implements CommandLineRunner {
     @Autowired
     private RepoCommunityGoals repoCommunityGoals;
 
+    @Autowired
+    private RepoConfig repoConfig;
+
     @Override
     public void run(String... args) throws Exception {
+        Config c= new Config();
+        c.setVariable("Ponderacion");
+        c.setValor("3");
+        c.setDescripcion("Ponderacion de Deportes sobre Objetivos para la coincidencia de eventos");
+        repoConfig.save(c);
+        //Datos de Configuracion
+
+
+        //
 
         String[] dificultades = { "Facil", "Dificil" };
         cargar("DifficultySports", repoDifficultySports, dificultades);

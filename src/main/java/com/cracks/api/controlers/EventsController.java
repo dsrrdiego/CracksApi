@@ -33,6 +33,7 @@ import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.Sports;
 // import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.aux.Coordenadas;
+import com.cracks.api.repos.RepoConfig;
 import com.cracks.api.repos.RepoEvents;
 import com.cracks.api.repos.RepoInterest;
 // import com.cracks.api.repos.RepoInterest;
@@ -74,6 +75,9 @@ public class EventsController {
     @Autowired
     private RepoInterest repoInterest;
 
+    @Autowired
+    private RepoConfig repoConfig;
+
     // @Operation(summary = "Eventos paginados", description = "Trae una lista de
     // eventos de acuerdo a la cantidad pedida, empezando por la página 0 de todos
     // los ventos que todavía no han ocurrido.")
@@ -91,7 +95,7 @@ public class EventsController {
     // return new ResponseEntity<ArrayList<Events>>(lista, HttpStatus.OK);
     // }
 
-    @Operation(summary = "Eventos para un usuario (paginado) ", description = "Trae una lista de eventos acordes al usuario, paginado")
+    @Operation(summary = "Eventos para un usuario (paginado) ", description = "Trae una lista de eventos acordes al usuario, paginado , comenzado por página 1")
     @GetMapping("/pullEvents/{userId}/{pagina}/{cantidad}")
     public ResponseEntity<List<EventDto>> pullEvents(@PathVariable Long userId, @PathVariable int cantidad,
             @PathVariable int pagina) {
@@ -103,35 +107,45 @@ public class EventsController {
         int userGoalsSize = uGoals.size();
         int userSportsSize = uSports.size();
 
-        List<Events> eventos = repoEvents.findAll(); // guarda con la fecha
+        List<Events> eventos = repoEvents.findByDate(); 
+        int index = 0;
         for (Events e : eventos) {
+            index++;
             List<Goals> eGoals = repoInterest.getGoalsFromEvent(e.getId());
             List<Sports> eSports = repoInterest.getSportsFromEvent(e.getId());
 
-            int coincidenciasGoals=0;
+            int coincidenciasGoals = 0;
             for (Goals eG : eGoals) {
                 if (uGoals.contains(eG)) {
-                    // System.out.println("\n\n***"+eG.getTitle()+"\n\n***");
                     coincidenciasGoals++;
                 }
             }
-            int coincidenciasSports=0;
+            int coincidenciasSports = 0;
             for (Sports eS : eSports) {
-                
+
                 if (uSports.contains(eS)) {
-                    // System.out.println("\n\n***"+eS.getTitle()+"\n\n***");
                     coincidenciasSports++;
-                    
+
                 }
             }
-            System.out.println("\n** Para evento: "+e.getId());
-            System.out.println("Coincide Goals "+coincidenciasGoals+" de "+userGoalsSize );
-            System.out.println("Coincide Sports "+coincidenciasSports+" de "+userSportsSize);
-            double prioridad=0.4*((double)coincidenciasGoals/(double)userGoalsSize)+0.6*((double)coincidenciasSports/(double)userSportsSize);
-            System.out.println("Porcentaje de prioridad: "+prioridad);
-            EventDto eDto=new EventDto(e,prioridad);
+            double prioridad = 0.4 * ((double) coincidenciasGoals / (double) userGoalsSize)
+                    + 0.6 * ((double) coincidenciasSports / (double) userSportsSize);
 
-            resultado.add(eDto);
+            double ponderacion=Double.parseDouble(repoConfig.find("Ponderacion"));
+            double prioridad2= (ponderacion*(double)coincidenciasSports+(double)coincidenciasGoals)/(ponderacion*(double)userSportsSize+(double)userGoalsSize);
+            
+            System.out.println("\n** Para evento: " + e.getId());
+            System.out.println("Coincide Goals " + coincidenciasGoals + " de " + userGoalsSize);
+            System.out.println("Coincide Sports " + coincidenciasSports + " de " + userSportsSize);
+            System.out.println("Porcentaje de prioridad: " + prioridad);
+            System.out.println("Porcentaje de prioridad2: " + prioridad2);
+            EventDto eDto = new EventDto(e, prioridad,prioridad2);
+
+            if (index < (cantidad + 1 * pagina) && index > cantidad * (pagina - 1))
+                resultado.add(eDto);
+
+            if (index+1 == (cantidad + 1 * pagina) ) break;
+
 
         }
         Collections.sort(resultado);

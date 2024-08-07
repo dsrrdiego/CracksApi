@@ -18,7 +18,8 @@ public interface RepoEvents extends JpaRepository<Events,Long>{
     //     @Param("offset") int offset
     // );
     @Query("SELECT e FROM Events e WHERE e.dateInit > NOW() ")
-    List<Events> findPage(PageRequest page);
+    List<Events> findByDate();
+    // List<Events> findPage(PageRequest page);
 
     @Query("SELECT e FROM Events e WHERE e.id=:id")
     Events fiXIde(@Param("id") Long id);
