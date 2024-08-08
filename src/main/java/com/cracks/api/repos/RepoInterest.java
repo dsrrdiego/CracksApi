@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.cracks.api.dtos.PullGoalsDto;
 import com.cracks.api.dtos.UserActivitiesDto;
 import com.cracks.api.modelos.Goals;
 import com.cracks.api.modelos.Interest;
@@ -36,5 +37,7 @@ public interface RepoInterest extends JpaRepository<Interest,Long>{
 
     @Query("SELECT i.sports FROM Interest i WHERE i.usuario.id=:id")
     List<Sports> getSportsFromUser(Long id);
+
+   
 
 }

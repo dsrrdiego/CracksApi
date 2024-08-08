@@ -21,10 +21,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 
 public class Sports extends GoalsSports{
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // private Long id;
-
    
     @ManyToOne
     private DifficultySports difficulty;

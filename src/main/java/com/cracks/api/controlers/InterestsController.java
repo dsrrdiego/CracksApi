@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cracks.api.dtos.PullGoalsDto;
+import com.cracks.api.dtos.SportPostDto;
 import com.cracks.api.dtos.UserActivitiesDto;
 import com.cracks.api.modelos.Goals;
 import com.cracks.api.modelos.GoalsSports;
@@ -28,14 +30,16 @@ import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoSports;
 import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoCategoryGoals;
+import com.cracks.api.repos.aux.RepoClimateSports;
 import com.cracks.api.repos.aux.RepoCommunityGoals;
+import com.cracks.api.repos.aux.RepoDifficultySports;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.cracks.api.dtos.CoindicenciasGoalsDto;
 import com.cracks.api.dtos.EventActivitiesDto;
-import com.cracks.api.dtos.GoalDto;
+import com.cracks.api.dtos.GoalPostDto;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -62,6 +66,12 @@ public class InterestsController {
 
     @Autowired
     private RepoCommunityGoals repoCommunity;
+
+    @Autowired
+    private RepoDifficultySports repoDificulty;
+
+    @Autowired
+    private RepoClimateSports repoClimate;
 
     @Operation(summary = "Intereses del usuario", description = "Trae una lista sencilla de todos los Intereses del Usuario")
     @GetMapping("/pullUserActivities/{id}")
@@ -114,19 +124,53 @@ public class InterestsController {
 
     @Operation(summary = "Agregar Goal(Objetivo) ")
     @PostMapping("/goal")
-    public ResponseEntity<String> goal(@RequestBody GoalDto gDto) {
+    public ResponseEntity<String> goal(@RequestBody GoalPostDto gDto) {
         Goals g = new Goals();
         g.setTitle(gDto.title);
-try{
-        g.setCategory(repoCategory.findById(gDto.category).get());
-        g.setCommunity(repoCommunity.findById(gDto.comunity).get());
-        repoGoals.save(g);
-        return new ResponseEntity<String>("ok",HttpStatus.OK);
-}catch(Exception e){
-    return new ResponseEntity<String>("mal",HttpStatus.OK);
-
-}
-
+        try {
+            g.setCategory(repoCategory.findById(gDto.category).get());
+            g.setCommunity(repoCommunity.findById(gDto.comunity).get());
+            repoGoals.save(g);
+            return new ResponseEntity<String>("ok", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>("mal", HttpStatus.OK);
+        }
     }
+
+    @Operation(summary = "Agregar Deporte")
+    @PostMapping("/sport")
+    public ResponseEntity<String> sport(@RequestBody SportPostDto sDto) {
+        Sports s = new Sports();
+        s.setTitle(sDto.title);
+        s.setStatics(sDto.statics);
+        s.setEquipament(sDto.equipament);
+        try {
+            s.setCategory(repoCategory.findById(sDto.category).get());
+            s.setCommunity(repoCommunity.findById(sDto.comunity).get());
+            s.setDifficulty(repoDificulty.findById(sDto.dificulty).get());
+            s.setClimate(repoClimate.findById(sDto.climate).get());
+
+            repoSports.save(s);
+            return new ResponseEntity<String>("ok", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>("mal", HttpStatus.OK);
+        }
+    }
+
+    @Operation(summary = "Lista paginada de todos los Goals (Objtivos) ")
+    @GetMapping("/goal/{cantidad}/{pagina}")
+    public List<PullGoalsDto> goal(@PathVariable int cantidad,@PathVariable int pagina){
+        PageRequest page=PageRequest.of(pagina-1,cantidad);
+        return repoGoals.getAllGoals(page);
+    }
+    @Operation(summary = "Lista paginada de todos los Deportes ")
+    @GetMapping("/sport/{cantidad}/{pagina}")
+    public List<PullGoalsDto> sport(@PathVariable int cantidad,@PathVariable int pagina){
+        PageRequest page=PageRequest.of(pagina-1,cantidad);
+
+        return repoSports.getAllSports(page);
+    }
+
+
 
 }
