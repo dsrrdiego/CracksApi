@@ -32,10 +32,10 @@ public class EventDto implements Comparable<EventDto> {
     String urlShare;
     List<String> goals = new ArrayList<>();
     List<String> sports = new ArrayList<>();
-    Double prioridad;
-    Double prioridad2;
+    float prioridad;
+    float prioridad2;
 
-    public EventDto(Events e, double prioridad,double prioridad2) {
+    public EventDto(Events e, float prioridad,float prioridad2) {
         event_id = e.getId();
         if (e.getUser() != null)
             user_id = e.getUser().getId();
@@ -51,7 +51,7 @@ public class EventDto implements Comparable<EventDto> {
         }
         dateInit = e.getDateInit();
         dateEnd = e.getDateEnd();
-        maxParticipants = e.getMaxParticipantes();
+        maxParticipants = e.getMaxParticipants();
         if (e.getCategory() != null)
             category = e.getCategory().getId();
         urlShare = e.getUrlShare();

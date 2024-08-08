@@ -26,6 +26,7 @@ import com.cracks.api.modelos.aux.StatusParticipants;
 import com.cracks.api.modelos.aux.TypeNotification;
 import com.cracks.api.repos.RepoConfig;
 import com.cracks.api.repos.RepoEvents;
+import com.cracks.api.repos.RepoGoals;
 // import com.cracks.api.repos.RepoInterest;
 // import com.cracks.api.repos.RepoOwnerInterestEvents;
 // import com.cracks.api.repos.RepoOwnerInterestUsers;
@@ -36,7 +37,6 @@ import com.cracks.api.repos.aux.RepoCategoryGoals;
 import com.cracks.api.repos.aux.RepoClimateSports;
 import com.cracks.api.repos.aux.RepoCommunityGoals;
 import com.cracks.api.repos.aux.RepoDifficultySports;
-import com.cracks.api.repos.aux.RepoGoals;
 import com.cracks.api.repos.aux.RepoNameUserScore;
 import com.cracks.api.repos.aux.RepoRoleParticipants;
 import com.cracks.api.repos.aux.RepoStatusEvents;
@@ -135,7 +135,7 @@ public class runController implements CommandLineRunner {
         String[] communityGoals = { "Personal", "Social", "Grupo1" };
         cargar("CommunityGoals", repoCommunityGoals, communityGoals);
 
-        cargaABorrar();
+        // cargaABorrar();
 
     }
 

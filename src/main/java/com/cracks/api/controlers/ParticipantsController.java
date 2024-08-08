@@ -36,16 +36,7 @@ public class ParticipantsController {
     @Autowired
     RepoRoleParticipants repoRole;
 
-    // @GetMapping("/pullPassedEventsByUser/{id}")
-    // public List<Participants> passedEventByUser(@PathVariable Long id) {
-    //     List<Participants> lista = repoParticipants.findPasadosById(id);
-    //     for (Participants p : lista) {
-    //         p.getEvent().setGoals(goalSportsService.getEventsGoals(p.getEvent().getId()));
-    //         p.getEvent().setSports(goalSportsService.getEventsSports(p.getEvent().getId()));
-    //     }
-
-    //     return lista;
-    // }
+    
 
     @GetMapping("/pullParticipantsEventById/{id}")
     public ResponseEntity<List<Participants>> pullParticipantsById(@PathVariable Long id) {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cracks.api.dtos.EventDto;
+import com.cracks.api.dtos.EventPostDto;
 import com.cracks.api.modelos.aux.CategoryEvents;
 import com.cracks.api.modelos.aux.Coordenadas;
 import com.cracks.api.modelos.aux.StatusEvents;
@@ -58,10 +59,13 @@ public class Events {
     private String picture;
 
     @Column
-    private int maxParticipantes;
+    private int maxParticipants;
 
     @Column
     private boolean enabled;
+
+    @Column
+    private boolean visibility;
 
     @Column
     private boolean approvalRequired;
@@ -98,16 +102,18 @@ public class Events {
     // @Transient
     // private ArrayList<String> sports;
 
-    public Events(EventDto dto){
-        title=dto.getTitle();
-        description=dto.getBody();
-        dateInit=dto.getDateInit();
-        dateEnd=dto.getDateEnd();
-        maxParticipantes=dto.getMaxParticipants();
-        enabled=true;
-        approvalRequired=false;
-        urlShare=dto.getUrlShare();
+    public Events(EventPostDto dto){
+        title=dto.title;
+        this.dateInit           =dto.dateInit;
+        this.dateEnd =dto.dateEnd;
+        this.maxParticipants =dto.maxParticipants;
+        this.visibility =dto.visibility;
+        this.enabled =dto.enabled;
+        this.approvalRequired =dto.approvalRequired;
+        this.urlShare =dto.urlShare;
     }
+
+   
     
   
 

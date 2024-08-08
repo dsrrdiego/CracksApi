@@ -1,4 +1,4 @@
-package com.cracks.api.repos.aux;
+package com.cracks.api.repos;
 
 import java.util.List;
 

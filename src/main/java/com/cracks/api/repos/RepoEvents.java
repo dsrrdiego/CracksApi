@@ -27,6 +27,8 @@ public interface RepoEvents extends JpaRepository<Events,Long>{
     @Query("SELECT e FROM Events e WHERE e.dateEnd<NOW() AND e.notificado=FALSE")
     List<Events> vencidos();
 
+    
+
     // @Query("SELECT e FROM Events e WHERE e.goals LIKE :goals")
     // @Query("SELECT e FROM Events e JOIN e.goals g WHERE g IN :goals")
     // List<Events> getByGoals(List<Goals> goals);

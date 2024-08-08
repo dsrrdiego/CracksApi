@@ -108,3 +108,11 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 94 more
+2024-08-08 08:50:45.723311-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "delete [*]* from EVENTS WHERE id > 4"; se esperaba "identifier"
+Syntax error in SQL statement "delete [*]* from EVENTS WHERE id > 4"; expected "identifier"; SQL statement:
+delete * from EVENTS WHERE id > 4 [42001-224]
+2024-08-08 08:51:36.051233-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]* FROM EVENTS WHERE id > 4"; se esperaba "identifier"
+Syntax error in SQL statement "DELETE [*]* FROM EVENTS WHERE id > 4"; expected "identifier"; SQL statement:
+DELETE * FROM EVENTS WHERE id > 4 [42001-224]

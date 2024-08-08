@@ -20,10 +20,10 @@ import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.Sports;
 // import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.aux.CategoryGoals;
+import com.cracks.api.repos.RepoGoals;
 import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoSports;
 import com.cracks.api.repos.RepoUser;
-import com.cracks.api.repos.aux.RepoGoals;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
