@@ -7,9 +7,12 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cracks.api.dtos.PullGoalsDto;
@@ -24,12 +27,15 @@ import com.cracks.api.repos.RepoGoals;
 import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoSports;
 import com.cracks.api.repos.RepoUser;
+import com.cracks.api.repos.aux.RepoCategoryGoals;
+import com.cracks.api.repos.aux.RepoCommunityGoals;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.cracks.api.dtos.CoindicenciasGoalsDto;
 import com.cracks.api.dtos.EventActivitiesDto;
+import com.cracks.api.dtos.GoalDto;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -50,6 +56,12 @@ public class InterestsController {
 
     @Autowired
     private RepoInterest repoInterest;
+
+    @Autowired
+    private RepoCategoryGoals repoCategory;
+
+    @Autowired
+    private RepoCommunityGoals repoCommunity;
 
     @Operation(summary = "Intereses del usuario", description = "Trae una lista sencilla de todos los Intereses del Usuario")
     @GetMapping("/pullUserActivities/{id}")
@@ -76,7 +88,7 @@ public class InterestsController {
             CategoryGoals cat = g.getCategory();
             coincidencias.addAll(repoGoals.findByCat(cat));
         }
-        for (Goals g  : goals) {
+        for (Goals g : goals) {
             CoindicenciasGoalsDto borrarMe = new CoindicenciasGoalsDto(g.getId(), g.getTitle());
             coincidencias.remove(borrarMe);
         }
@@ -100,24 +112,21 @@ public class InterestsController {
         return new ResponseEntity<>(coincidencias, HttpStatus.OK);
     }
 
-    // @GetMapping("/eventActivities/{id}")
-    // public ResponseEntity<List<String>> eventgoals(@PathVariable Long id) {
-    // String jpql = "SELECT i.goal_sport_interest.title FROM Interest i WHERE
-    // TYPE(i.owner) = OwnerInterestEvent AND TYPE(i.goal_sport_interest)=Goals AND
-    // i.owner.event.id=:id";
-    // TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
-    // query.setParameter("id", id);
-    // return new ResponseEntity<>(query.getResultList(), HttpStatus.OK);
-    // }
+    @Operation(summary = "Agregar Goal(Objetivo) ")
+    @PostMapping("/goal")
+    public ResponseEntity<String> goal(@RequestBody GoalDto gDto) {
+        Goals g = new Goals();
+        g.setTitle(gDto.title);
+try{
+        g.setCategory(repoCategory.findById(gDto.category).get());
+        g.setCommunity(repoCommunity.findById(gDto.comunity).get());
+        repoGoals.save(g);
+        return new ResponseEntity<String>("ok",HttpStatus.OK);
+}catch(Exception e){
+    return new ResponseEntity<String>("mal",HttpStatus.OK);
 
-    // @GetMapping("/eventSports/{id}")
-    // public ResponseEntity<List<String>> eventSports(@PathVariable Long id) {
-    // String jpql = "SELECT i.goal_sport_interest.title FROM Interest i WHERE
-    // TYPE(i.owner) = OwnerInterestEvent AND TYPE(i.goal_sport_interest)=Sports AND
-    // i.owner.event.id=:id";
-    // TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
-    // query.setParameter("id", id);
-    // return new ResponseEntity<>(query.getResultList(), HttpStatus.OK);
-    // }
+}
+
+    }
 
 }

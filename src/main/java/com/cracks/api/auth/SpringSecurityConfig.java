@@ -59,6 +59,8 @@ public class SpringSecurityConfig {
                    authorize.requestMatchers(HttpMethod.GET, "/pullAllEvents/**","/pullEvents/**","/pullPassedEventsByUser/**","/pullEventById/**").permitAll();
                    
                    authorize.requestMatchers("/postEvent","/eventPicture").permitAll();
+                   authorize.requestMatchers("/goal").permitAll();
+
                    authorize.requestMatchers(HttpMethod.GET, "/eventPicture/**").permitAll();
                 //    authorize.requestMatchers(HttpMethod.GET, "/eventPicture/**").hasRole("SUPER_ADMIN");
                    
