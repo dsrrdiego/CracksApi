@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cracks.api.dtos.ParticipantsDto;
+import com.cracks.api.dtos.PullParticipantsDto;
 import com.cracks.api.modelos.Participants;
 import com.cracks.api.repos.RepoEvents;
 import com.cracks.api.repos.RepoParticipants;
@@ -38,28 +38,28 @@ public class ParticipantsController {
 
     
 
-    @GetMapping("/pullParticipantsEventById/{id}")
-    public ResponseEntity<List<Participants>> pullParticipantsById(@PathVariable Long id) {
-        return new ResponseEntity<List<Participants>>(repoParticipants.findByUserId(id), HttpStatus.OK);
+    @GetMapping("/pullParticipantsEventById/{eventId}")
+    public ResponseEntity<List<PullParticipantsDto>> pullParticipantsById(@PathVariable Long eventId) {
+        return new ResponseEntity<List<PullParticipantsDto>>(repoParticipants.getByEventId(eventId), HttpStatus.OK);
     }
 
-    @PostMapping("/pushParticipant")
-    public ResponseEntity<String> pushParticipant(@RequestBody ParticipantsDto dto) {
-        try {
+    // @PostMapping("/pushParticipant")
+    // public ResponseEntity<String> pushParticipant(@RequestBody ParticipantsDto dto) {
+    //     try {
 
-            Participants p = new Participants();
-            p.setUser(repoUser.findById(dto.getUserId()).get());
-            p.setEvent(repoEvents.findById(dto.getEventId()).get());
-            p.setStatus(repoStatus.findById(dto.getStatus()).get());
-            p.setRole(repoRole.findById(dto.getRole()).get());
-            repoParticipants.save(p);
-            return new ResponseEntity<String>("Participante registrado exitosamente", HttpStatus.OK);
-        } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<String>("El usuario ya está registrado para este evento.", HttpStatus.CONFLICT);
+    //         Participants p = new Participants();
+    //         p.setUser(repoUser.findById(dto.getUserId()).get());
+    //         p.setEvent(repoEvents.findById(dto.getEventId()).get());
+    //         p.setStatus(repoStatus.findById(dto.getStatus()).get());
+    //         p.setRole(repoRole.findById(dto.getRole()).get());
+    //         repoParticipants.save(p);
+    //         return new ResponseEntity<String>("Participante registrado exitosamente", HttpStatus.OK);
+    //     } catch (DataIntegrityViolationException e) {
+    //         return new ResponseEntity<String>("El usuario ya está registrado para este evento.", HttpStatus.CONFLICT);
 
-        } catch (Exception e) {
-            return new ResponseEntity<String>("Error inesperado. " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    //     } catch (Exception e) {
+    //         return new ResponseEntity<String>("Error inesperado. " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
 
 }

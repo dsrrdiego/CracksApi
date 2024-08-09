@@ -116,3 +116,11 @@ delete * from EVENTS WHERE id > 4 [42001-224]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE [*]* FROM EVENTS WHERE id > 4"; se esperaba "identifier"
 Syntax error in SQL statement "DELETE [*]* FROM EVENTS WHERE id > 4"; expected "identifier"; SQL statement:
 DELETE * FROM EVENTS WHERE id > 4 [42001-224]
+2024-08-09 10:07:22.135835-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'TRUEl' (EVENTS: ""ENABLED"" BOOLEAN)"
+Data conversion error converting "'TRUEl' (EVENTS: ""ENABLED"" BOOLEAN)"; SQL statement:
+UPDATE "PUBLIC"."EVENTS" SET "ID"=? ,"APPROVAL_REQUIRED"=? ,"DATE_END"=? ,"DATE_INIT"=? ,"DESCRIPTION"=? ,"ENABLED"=? ,"MAX_PARTICIPANTES"=? ,"NOTIFICADO"=? ,"PICTURE"=? ,"REGISTER_DATE"=? ,"TITLE"=? ,"URL_SHARE"=? ,"CATEGORY_ID"=? ,"LOCATION_ID"=? ,"STATUS_ID"=? ,"USER_ID"=? ,"MAX_PARTICIPANTS"=? ,"VISIBILITY"=?  WHERE "ID"=? [22018-224]
+2024-08-09 10:07:22.140402-03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'TRUEl' (EVENTS: ""ENABLED"" BOOLEAN)"
+Data conversion error converting "'TRUEl' (EVENTS: ""ENABLED"" BOOLEAN)"; SQL statement:
+UPDATE "PUBLIC"."EVENTS" SET "ID"=? ,"APPROVAL_REQUIRED"=? ,"DATE_END"=? ,"DATE_INIT"=? ,"DESCRIPTION"=? ,"ENABLED"=? ,"MAX_PARTICIPANTES"=? ,"NOTIFICADO"=? ,"PICTURE"=? ,"REGISTER_DATE"=? ,"TITLE"=? ,"URL_SHARE"=? ,"CATEGORY_ID"=? ,"LOCATION_ID"=? ,"STATUS_ID"=? ,"USER_ID"=? ,"MAX_PARTICIPANTS"=? ,"VISIBILITY"=?  WHERE "ID"=? [22018-224]

@@ -59,16 +59,16 @@ public class Events {
     private String picture;
 
     @Column
-    private int maxParticipants;
+    private Integer maxParticipants;
 
     @Column
-    private boolean enabled;
+    private Boolean enabled=true;
 
     @Column
-    private boolean visibility;
+    private Boolean visibility=true;
 
     @Column
-    private boolean approvalRequired;
+    private Boolean approvalRequired;
 
     @ManyToOne
     private CategoryEvents category;

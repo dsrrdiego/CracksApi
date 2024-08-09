@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.cracks.api.dtos.PullParticipantsDto;
 import com.cracks.api.modelos.Events;
 import com.cracks.api.modelos.Participants;
 import com.cracks.api.modelos.User;
@@ -26,5 +27,8 @@ public interface RepoParticipants extends JpaRepository<Participants,Long>{
 
     @Query("SELECT p.event FROM Participants p WHERE p.user.id=:userId AND p.event.dateInit < NOW()")
     List<Events> findPasadosParaParticipant(Long userId);
+
+    @Query("SELECT new com.cracks.api.dtos.PullParticipantsDto(p.id, p.event.id, p.user.id,p.user.name, p.status.status, p.role.role,p.dateCreation) FROM Participants p WHERE p.event.id=:eventId")
+    List<PullParticipantsDto> getByEventId(Long eventId);
     
 }

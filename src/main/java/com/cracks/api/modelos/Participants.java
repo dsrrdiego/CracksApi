@@ -2,6 +2,8 @@ package com.cracks.api.modelos;
 
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 import com.cracks.api.modelos.aux.RoleParticipants;
 import com.cracks.api.modelos.aux.StatusParticipants;
 
@@ -38,21 +40,9 @@ public class Participants {
     @ManyToOne
     private RoleParticipants role;
 
+    @Column
+    LocalDateTime dateCreation;
 
-    // no van mas?
-    // private String linked;
 
-    // private boolean attended;
-
-    // @Enumerated(EnumType.STRING)
-    // private Relation relation;
-
-    // private boolean achievementLevel;
-
-    // private float commitementLevel;
-
-    // public Participants(ParticipantsDto d){
-        
-    // }
 
 }
