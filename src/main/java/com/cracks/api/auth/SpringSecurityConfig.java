@@ -56,15 +56,19 @@ public class SpringSecurityConfig {
                     //Guarda, despues cambiar a no - autorizado!!!
                     authorize.requestMatchers(HttpMethod.GET, "/pullUserActivities/**","/pullEventActivities/**","/pullGoals/**","/pullSports/**").permitAll();
                    authorize.requestMatchers(HttpMethod.GET, "/pullUserInformation/**","/eventPicture/**","/pullSession/**").permitAll();
+                   authorize.requestMatchers( "/datosRegistro","/setUserGoals","/setUserSports").permitAll();
                    authorize.requestMatchers(HttpMethod.POST, "/eventPicture").permitAll();
 
                    authorize.requestMatchers(HttpMethod.GET, "/pullAllEvents/**","/pullEvents/**","/pullPassedEventsByUser/**","/pullEventById/**").permitAll();
                    
                    authorize.requestMatchers("/postEvent","/eventPicture").permitAll();
+                   authorize.requestMatchers(HttpMethod.GET, "/eventPicture/**").permitAll();
+
                    authorize.requestMatchers("/goal","/sport").permitAll();
                    authorize.requestMatchers(HttpMethod.GET,"/goal/**","/sport/**").permitAll();
 
-                   authorize.requestMatchers(HttpMethod.GET, "/eventPicture/**").permitAll();
+                   authorize.requestMatchers(HttpMethod.GET,"/notificar/**").permitAll();
+
                 //    authorize.requestMatchers(HttpMethod.GET, "/eventPicture/**").hasRole("SUPER_ADMIN");
                    
                    authorize.requestMatchers(HttpMethod.GET, "/pullParticipantsEventById/**").permitAll();
