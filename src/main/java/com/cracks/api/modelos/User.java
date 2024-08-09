@@ -51,10 +51,9 @@ public class User {
     @ManyToOne
     private Coordenadas cordenadas;
 
-    @Column
-    private String picture;
+    // @Column
+    // private String picture;
 
-    // @JsonManagedReference
     @OneToMany(mappedBy="usuario", cascade=CascadeType.ALL, orphanRemoval = true)
     private List<Interest> goals;
    

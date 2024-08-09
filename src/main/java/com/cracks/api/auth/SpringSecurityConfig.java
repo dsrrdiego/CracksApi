@@ -55,7 +55,9 @@ public class SpringSecurityConfig {
                     authorize.requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll();
                     //Guarda, despues cambiar a no - autorizado!!!
                     authorize.requestMatchers(HttpMethod.GET, "/pullUserActivities/**","/pullEventActivities/**","/pullGoals/**","/pullSports/**").permitAll();
-                   authorize.requestMatchers(HttpMethod.GET, "/pullUserInformation/**","/pullSession/**").permitAll();
+                   authorize.requestMatchers(HttpMethod.GET, "/pullUserInformation/**","/eventPicture/**","/pullSession/**").permitAll();
+                   authorize.requestMatchers(HttpMethod.POST, "/eventPicture").permitAll();
+
                    authorize.requestMatchers(HttpMethod.GET, "/pullAllEvents/**","/pullEvents/**","/pullPassedEventsByUser/**","/pullEventById/**").permitAll();
                    
                    authorize.requestMatchers("/postEvent","/eventPicture").permitAll();
