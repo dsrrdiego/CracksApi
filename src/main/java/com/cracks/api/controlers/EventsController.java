@@ -13,7 +13,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,17 +41,12 @@ import com.cracks.api.repos.RepoGoals;
 import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoParticipants;
 import com.cracks.api.repos.RepoSports;
-// import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoCategoryEvents;
 import com.cracks.api.repos.aux.RepoCoordenadas;
-import com.cracks.api.repos.aux.RepoStatusEvents;
-import com.cracks.api.servicios.GoalSportsService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 @Tag(name = "Eventos", description = "Controladores relacionados a los Eventos de la aplicación")
 @RestController
@@ -60,17 +54,8 @@ public class EventsController {
     @Autowired
     private RepoEvents repoEvents;
 
-    // @PersistenceContext
-    // private EntityManager entityManager;
-
-    // @Autowired
-    // private GoalSportsService goalSportsService;
-
     @Autowired
     private RepoUser repoUser;
-
-    @Autowired
-    private RepoStatusEvents repoStatus;
 
     @Autowired
     private RepoCategoryEvents repoCategory;

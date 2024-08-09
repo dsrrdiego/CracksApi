@@ -2,14 +2,11 @@ package com.cracks.api.repos;
 
 import java.util.List;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.cracks.api.modelos.Events;
-import com.cracks.api.modelos.Goals;
-import com.cracks.api.modelos.Interest;
 
 public interface RepoEvents extends JpaRepository<Events,Long>{
     // @Query(value = "SELECT e.* FROM events e WHERE e.date_Init > NOW() ORDER BY id ASC LIMIT :limit OFFSET :offset ", nativeQuery = true)

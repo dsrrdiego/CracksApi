@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.cracks.api.modelos.aux.Coordenadas;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;

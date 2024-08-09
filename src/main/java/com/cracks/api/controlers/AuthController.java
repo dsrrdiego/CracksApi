@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +86,7 @@ public class AuthController {
 
     @Operation(summary = "Registro de Usuario", description = "Punto de entrada para Registrar un Usuario Nuevo")
     @PostMapping(value = "/registro", consumes = "multipart/form-data")
-    public ResponseEntity<String> registro(@RequestParam("name") String name,
+    public ResponseEntity<HashMap<String,Long>> registro(@RequestParam("name") String name,
             @RequestParam("psw") MultipartFile clave) {
 
         // if (repoUser.existsByName(name)) {
@@ -110,8 +111,9 @@ public class AuthController {
         Session session = new Session(u, psw);
         session.setTypeLogin(TypeLogin.MANUAL);
         repoSession.save(session);
-
-        return new ResponseEntity<String>("Registro exitoso para El usuario: " + name, HttpStatus.OK);
+            HashMap<String,Long> h=new HashMap<String,Long>();
+            h.put("id",u.getId());
+        return new ResponseEntity<>(h, HttpStatus.OK);
     }
 
     @Autowired
@@ -132,7 +134,7 @@ public class AuthController {
 
     }
 
-    @Operation(summary = "Logueo de Usuario via String", description = "Punto de entrada para el Usuario, aqui recibirá un Token para tener acceso a la API")
+    @Operation(summary = "Logueo de Usuario via String", description = "Punto de entrada para el Usuario, aqui recibirá un Token para tener acceso a la API",hidden = true)
     @PostMapping(value = "/login2",consumes = "multipart/form-data")
     public ResponseEntity<String> login2(@RequestBody LoginDto dto) {
         String psw=dto.getPwd().replace(" ","\n");
@@ -161,12 +163,13 @@ public class AuthController {
 
     // return "Hola " + a;
     // }
+    @Operation(hidden=true)
     @GetMapping("/aa")
     public String aa(){
         return "hola";
     }
 
-    // @Operation(hidden = true)
+    @Operation(hidden = true)
     @PostMapping("/encriptar")
     public String encriptar(@RequestParam String clave) throws IOException, InterruptedException {
         ProcessBuilder processBuilder = new ProcessBuilder("sh","-c",

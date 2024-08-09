@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.cracks.api.modelos.Events;
-import com.cracks.api.modelos.Goals;
 import com.cracks.api.modelos.Interest;
-import com.cracks.api.modelos.Sports;
 
 import lombok.Data;
 

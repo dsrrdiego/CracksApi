@@ -1,6 +1,5 @@
 package com.cracks.api.controlers;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,7 +7,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,15 +18,11 @@ import com.cracks.api.dtos.PullGoalsDto;
 import com.cracks.api.dtos.SportPostDto;
 import com.cracks.api.dtos.UserActivitiesDto;
 import com.cracks.api.modelos.Goals;
-import com.cracks.api.modelos.GoalsSports;
-import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.Sports;
-// import com.cracks.api.modelos.Interest;
 import com.cracks.api.modelos.aux.CategoryGoals;
 import com.cracks.api.repos.RepoGoals;
 import com.cracks.api.repos.RepoInterest;
 import com.cracks.api.repos.RepoSports;
-import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoCategoryGoals;
 import com.cracks.api.repos.aux.RepoClimateSports;
 import com.cracks.api.repos.aux.RepoCommunityGoals;
@@ -38,12 +32,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.cracks.api.dtos.CoindicenciasGoalsDto;
-import com.cracks.api.dtos.EventActivitiesDto;
 import com.cracks.api.dtos.GoalPostDto;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 
 @Tag(name = "Instereses", description = "Todas las operaciones vinculadas a los Intereses, tanto de Usuarios como de Eventos, tanto de Objetivos como Deportes")
 @RestController

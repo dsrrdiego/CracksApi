@@ -20,7 +20,6 @@ import com.cracks.api.repos.RepoParticipants;
 import com.cracks.api.repos.RepoUser;
 import com.cracks.api.repos.aux.RepoRoleParticipants;
 import com.cracks.api.repos.aux.RepoStatusParticipants;
-import com.cracks.api.servicios.GoalSportsService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -30,14 +29,16 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class ParticipantsController {
     @Autowired
     private RepoParticipants repoParticipants;
-    @Autowired
-    private GoalSportsService goalSportsService;
+
     @Autowired
     RepoUser repoUser;
+
     @Autowired
     RepoEvents repoEvents;
+
     @Autowired
     RepoStatusParticipants repoStatus;
+
     @Autowired
     RepoRoleParticipants repoRole;
 

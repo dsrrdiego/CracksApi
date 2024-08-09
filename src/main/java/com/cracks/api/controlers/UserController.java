@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cracks.api.modelos.Events;
 import com.cracks.api.modelos.Session;
 import com.cracks.api.modelos.User;
 import com.cracks.api.repos.RepoSession;

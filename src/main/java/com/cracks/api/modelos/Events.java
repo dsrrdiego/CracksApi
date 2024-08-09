@@ -3,10 +3,8 @@ package com.cracks.api.modelos;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.cracks.api.dtos.EventDto;
 import com.cracks.api.dtos.EventPostDto;
 import com.cracks.api.modelos.aux.CategoryEvents;
 import com.cracks.api.modelos.aux.Coordenadas;
